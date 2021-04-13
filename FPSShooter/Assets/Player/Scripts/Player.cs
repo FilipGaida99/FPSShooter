@@ -7,11 +7,10 @@ public class Player : MonoBehaviour
 {
     private Weapon[] weapons = new Weapon[3];
     private int chosedWeapon = 0;
-    private Camera camera;
+
     // Start is called before the first frame update
     void Awake()
     {
-        camera = GetComponent<InputController>().playerCamera;
         weapons[0] = GameObject.FindGameObjectWithTag("Pistol").GetComponent<Pistol>();
         if(weapons[0] == null)
         {
@@ -23,7 +22,7 @@ public class Player : MonoBehaviour
     {
         if(weapons[chosedWeapon] != null)
         {
-            weapons[chosedWeapon].Shoot(transform.position, camera.transform.forward);
+            weapons[chosedWeapon].Shoot(transform.position, transform.forward);
         }
     }
 

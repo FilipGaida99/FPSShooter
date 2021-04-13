@@ -1,25 +1,37 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
+[RequireComponent(typeof(AudioSource))]
 public abstract class BulletWeapon : MonoBehaviour, Weapon
 {
-    protected float reloadTime;
-
+    [Header("Attack parameters")]
     [SerializeField]
     private float maxDistance = 100;
     [SerializeField]
-    private readonly int maxMagazine = 10;
+    private int maxMagazine = 10;
     [SerializeField]
-    private readonly int maxBullets = 300;
+    private int maxBullets = 300;
     private int magazine;
     private int bullets;
     private bool reloading;
     private float leftToReload;
     [SerializeField]
     private float damage = 2;
+    [Header("Prefabs")]
     [SerializeField]
     private GameObject linePrefab;
+    [SerializeField]
+    private Sprite reload;
+    [SerializeField]
+    private Sprite aim;
+    [SerializeField]
+    private AudioClip shootSound;
+    [SerializeField]
+    private AudioClip reloadSound;
+
+    private AudioSource audioSource;
 
     public abstract float ReloadTime { get; }
 
@@ -43,12 +55,17 @@ public abstract class BulletWeapon : MonoBehaviour, Weapon
         magazine = maxMagazine;
         bullets = maxBullets;
         reloading = false;
+        audioSource = GetComponent<AudioSource>();
     }
 
     virtual public void Reload()
     {
-        if (!reloading)
+        if (!reloading && bullets > 0)
         {
+            audioSource.clip = reloadSound;
+            audioSource.Play();
+
+            SetAimImage(reload);
             reloading = true;
             leftToReload = ReloadTime;
         }
@@ -56,6 +73,7 @@ public abstract class BulletWeapon : MonoBehaviour, Weapon
 
     virtual public bool Shoot(Vector3 from, Vector3 direction)
     {
+        //Checking if can shoot.
         if (reloading || bullets <= 0)
         {
             return false; 
@@ -67,6 +85,10 @@ public abstract class BulletWeapon : MonoBehaviour, Weapon
         }
         magazine--;
 
+        //Actual shoot
+        audioSource.clip = shootSound;
+        audioSource.Play();
+
         RaycastHit hit;
         Vector3 hitPoint;
         if (Physics.Raycast(from, direction, out hit, maxDistance))
@@ -76,9 +98,10 @@ public abstract class BulletWeapon : MonoBehaviour, Weapon
         }
         else
         {
+            //There was no hit, just draw trace.
             hitPoint = from + direction * maxDistance;
         }
-
+        
         var traceObject = Instantiate(linePrefab);
         var trace = traceObject.GetComponent<ShootTrace>();
         var farest = from + direction * maxDistance;
@@ -106,6 +129,7 @@ public abstract class BulletWeapon : MonoBehaviour, Weapon
             if(leftToReload < 0)
             {
                 reloading = false;
+                SetAimImage(aim);
                 if(bullets - maxMagazine < 0)
                 {
                     magazine = bullets;
@@ -117,6 +141,14 @@ public abstract class BulletWeapon : MonoBehaviour, Weapon
                     bullets -= maxMagazine;
                 }
             }
+        }
+    }
+
+    private void SetAimImage(Sprite sprite) {
+        var aimingUI = GameObject.FindGameObjectWithTag("Aim").GetComponent<Image>();
+        if (aimingUI != null)
+        {
+            aimingUI.sprite = sprite;
         }
     }
 

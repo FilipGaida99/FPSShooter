@@ -66,9 +66,9 @@
   <ItemGroup>
     <Compile Include="Assets\Player\Scripts\InputController.cs" />
     <Compile Include="Assets\Player\Scripts\Player.cs" />
+    <Compile Include="Assets\Weapons\Aiming\ShootTrace.cs" />
     <Compile Include="Assets\Weapons\BulletWeapon.cs" />
     <Compile Include="Assets\Weapons\Pistol\Scripts\Pistol.cs" />
-    <Compile Include="Assets\Weapons\ShootTrace.cs" />
     <Compile Include="Assets\Weapons\Weapon.cs" />
     <Reference Include="UnityEngine">
       <HintPath>F:/unity base/Editor/2019.4.24f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>

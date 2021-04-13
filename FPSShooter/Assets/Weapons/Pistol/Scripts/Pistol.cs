@@ -5,7 +5,7 @@ using UnityEngine;
 public class Pistol : BulletWeapon
 {
     private bool wasReleased = true;
-    private Animation animation;
+    private new Animation animation;
 
     public override float ReloadTime { 
         get { 
