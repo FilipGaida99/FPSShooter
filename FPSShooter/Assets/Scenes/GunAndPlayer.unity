@@ -121,20 +121,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &966523766 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6516181514845368387, guid: f6adf60a0f90e73489747922bdfc9b81,
-    type: 3}
-  m_PrefabInstance: {fileID: 1437209023}
-  m_PrefabAsset: {fileID: 0}
---- !u!81 &966523771
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 966523766}
-  m_Enabled: 1
 --- !u!1 &1250029470
 GameObject:
   m_ObjectHideFlags: 0
@@ -383,6 +369,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2021153022, guid: f6adf60a0f90e73489747922bdfc9b81, type: 3}
+      propertyPath: meleeWeaponIndex
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2021153022, guid: f6adf60a0f90e73489747922bdfc9b81, type: 3}
+      propertyPath: weaponsPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 115572, guid: 0d72c17103b886f4ebd560637450ecc3, type: 3}
+    - target: {fileID: 2021153022, guid: f6adf60a0f90e73489747922bdfc9b81, type: 3}
+      propertyPath: weaponsPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 149444, guid: 3d3a4f5fcb4669e4396a9e4382609315, type: 3}
     - target: {fileID: 6516181514845368387, guid: f6adf60a0f90e73489747922bdfc9b81,
         type: 3}
       propertyPath: m_Name

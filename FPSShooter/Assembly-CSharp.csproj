@@ -68,6 +68,7 @@
     <Compile Include="Assets\Player\Scripts\Player.cs" />
     <Compile Include="Assets\Weapons\Aiming\ShootTrace.cs" />
     <Compile Include="Assets\Weapons\BulletWeapon.cs" />
+    <Compile Include="Assets\Weapons\Machete01\Scripts\MeleeWeapon.cs" />
     <Compile Include="Assets\Weapons\Pistol\Scripts\Pistol.cs" />
     <Compile Include="Assets\Weapons\Weapon.cs" />
     <Reference Include="UnityEngine">

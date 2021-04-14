@@ -39,8 +39,6 @@ public class Pistol : BulletWeapon
         return false;
     }
 
-
-
     override public void Update()
     {
         base.Update();
@@ -50,4 +48,23 @@ public class Pistol : BulletWeapon
         }
     }
 
+    public override void OnChoose()
+    {
+        base.OnChoose(); 
+        //Reset animation.
+        animation.Play();
+        StartCoroutine(StopAnimation());
+    }
+
+    public override void OnHide()
+    {
+        base.OnHide();
+    }
+
+    private IEnumerator StopAnimation()
+    {
+        yield return null;
+        animation.Stop();
+        yield break;
+    }
 }

@@ -152,4 +152,14 @@ public abstract class BulletWeapon : MonoBehaviour, Weapon
         }
     }
 
+    virtual public void OnChoose()
+    {
+        SetAimImage(aim);
+    }
+
+    virtual public void OnHide()
+    {
+        //Stop reloading.
+        reloading = false;
+    }
 }

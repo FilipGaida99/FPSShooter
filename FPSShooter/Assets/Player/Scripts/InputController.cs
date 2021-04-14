@@ -68,6 +68,11 @@ public class InputController : MonoBehaviour
             player.Reload();
         }
 
+        if(Mathf.Abs(Input.mouseScrollDelta.y) > 0.1)
+        {
+            player.ChangeWeaponToNext(Input.mouseScrollDelta.y > 0 ? 1 : -1);
+        }
+
         // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
         // when the moveDirection is multiplied by deltaTime). This is because gravity should be applied
         // as an acceleration (ms^-2)
@@ -86,8 +91,8 @@ public class InputController : MonoBehaviour
             rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
             rotationY += Input.GetAxis("Mouse X") * lookSpeed;
             transform.rotation = Quaternion.identity;
-            transform.Rotate(new Vector3(1, 0, 0), rotationX, Space.World);
-            transform.Rotate(new Vector3(0, 1, 0), rotationY, Space.World);
+            transform.Rotate(Vector3.right, rotationX, Space.World);
+            transform.Rotate(Vector3.up, rotationY, Space.World);
         }
     }
 }
