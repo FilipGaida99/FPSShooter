@@ -91,10 +91,18 @@ public abstract class BulletWeapon : MonoBehaviour, Weapon
 
         RaycastHit hit;
         Vector3 hitPoint;
-        if (Physics.Raycast(from, direction, out hit, maxDistance))
+        LayerMask mask = LayerMask.GetMask("Character");
+        int maskValue = mask.value;
+        maskValue = ~maskValue;
+        if (Physics.Raycast(from, direction, out hit, maxDistance, maskValue))
         {
             hitPoint = hit.point;
             //TODO cast Enemy.
+            var hitbox = hit.collider.gameObject.GetComponent<Hitbox>();
+            if (hitbox != null)
+            {
+                hitbox.Hit(damage, hitPoint);
+            }
         }
         else
         {
@@ -106,7 +114,6 @@ public abstract class BulletWeapon : MonoBehaviour, Weapon
         var trace = traceObject.GetComponent<ShootTrace>();
         var farest = from + direction * maxDistance;
         trace.DrawLine(transform.Find("ShootingPoint").position, hitPoint);
-
         return true;
     }
 

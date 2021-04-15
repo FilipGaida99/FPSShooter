@@ -6,12 +6,12 @@ public class MeleeWeapon : MonoBehaviour, Weapon
 {
     [SerializeField]
     private float damage = float.MaxValue;
-
     [SerializeField]
-    private float maxDistance = 1;
-
+    private float maxSwingAngle = 90f;
     [SerializeField]
-    private float maxSwing = 0.5f;
+    private float swingTime = 0.5f;
+
+
 
     private bool animating = false;
     private bool wasReleased = true;
@@ -21,12 +21,7 @@ public class MeleeWeapon : MonoBehaviour, Weapon
     public int BulletsLeft { get => 0; set { } }
     public float Damage { get => damage; set => damage = value; }
 
-    void OnDrawGizmosSelected()
-    {
-        // Draw a yellow sphere at the transform's position with max shoot distance
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, maxDistance);
-    }
+
 
     public void OnEnable()
     {
@@ -51,6 +46,7 @@ public class MeleeWeapon : MonoBehaviour, Weapon
         if (!animating && wasReleased) {
             animating = true;
             wasReleased = false;
+            combination = false;
             StartCoroutine(Animate());
         }
         else if(animating && wasReleased)
@@ -77,7 +73,7 @@ public class MeleeWeapon : MonoBehaviour, Weapon
         {
             int steps = 10;
             float angle = 90;
-            float time = 0.1f;
+            float time = swingTime / 5;
             for (int i = 0; i < steps; i++)
             {
                 transform.Rotate(Vector3.up, angle / steps);
@@ -87,8 +83,8 @@ public class MeleeWeapon : MonoBehaviour, Weapon
         //Slash
         {
             int steps = 100;
-            float angle = -90;
-            float time = 0.4f;
+            float angle = -maxSwingAngle;
+            float time = 4 * swingTime / 5;
             for (int i = 0; i < steps; i++)
             {
                 transform.RotateAround(transform.parent.position, transform.parent.up, angle / steps);
@@ -104,7 +100,7 @@ public class MeleeWeapon : MonoBehaviour, Weapon
             {
                 int steps = 10;
                 float angle = 180;
-                float time = 0.1f;
+                float time = swingTime / 5;
                 for (int i = 0; i < steps; i++)
                 {
                     transform.Rotate(Vector3.right, angle / steps);
@@ -115,8 +111,8 @@ public class MeleeWeapon : MonoBehaviour, Weapon
 
             {
                 int steps = 100;
-                float angle = 90;
-                float time = 0.4f;
+                float angle = maxSwingAngle;
+                float time = 4 * swingTime / 5;
                 for (int i = 0; i < steps; i++)
                 {
                     transform.RotateAround(transform.parent.position, transform.parent.up, angle / steps);

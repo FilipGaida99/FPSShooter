@@ -64,13 +64,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Enemies\Hitbox\Hitbox.cs" />
+    <Compile Include="Assets\Enemies\Scripts\Enemy.cs" />
+    <Compile Include="Assets\Enemies\Zombie\Scripts\Zombie.cs" />
     <Compile Include="Assets\Player\Scripts\InputController.cs" />
     <Compile Include="Assets\Player\Scripts\Player.cs" />
+    <Compile Include="Assets\PostProcessing\Scripts\TintCameraPP.cs" />
     <Compile Include="Assets\Weapons\Aiming\ShootTrace.cs" />
     <Compile Include="Assets\Weapons\BulletWeapon.cs" />
     <Compile Include="Assets\Weapons\Machete01\Scripts\MeleeWeapon.cs" />
     <Compile Include="Assets\Weapons\Pistol\Scripts\Pistol.cs" />
     <Compile Include="Assets\Weapons\Weapon.cs" />
+    <None Include="Assets\PostProcessing\Materials\Tint.shader" />
     <Reference Include="UnityEngine">
       <HintPath>F:/unity base/Editor/2019.4.24f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

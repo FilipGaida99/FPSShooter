@@ -23,6 +23,13 @@ public class Player : MonoBehaviour
 
     private int chosedWeapon = 0;
 
+    [Header("Dying Parameters")]
+    [SerializeField]
+    private float dyingTime = 1;
+
+
+    private TintCameraPP tintCamera;
+
 
 
     // Start is called before the first frame update
@@ -31,6 +38,7 @@ public class Player : MonoBehaviour
         weapons = new List<Weapon>();
         weaponsObjects = new List<GameObject>();
         Life = maxLife;
+        tintCamera = GetComponentInChildren<TintCameraPP>();
         foreach(var prefab in weaponsPrefabs)
         {
             InstantiateWeapon(prefab);
@@ -66,6 +74,11 @@ public class Player : MonoBehaviour
     public bool DealDamage(float damage)
     {
         Life -= damage;
+        tintCamera.tintValue = 0.7f;
+        if (!IsAlive)
+        {
+            StartCoroutine(Dying());
+        }
         return !IsAlive;
     }
 
@@ -116,8 +129,27 @@ public class Player : MonoBehaviour
 
     private bool HideShowWeapon(GameObject newShowed, GameObject newHidden)
     {
-
+        //TODO zrobić pojawianie sie broni
         return false;
+    }
+
+    private IEnumerator Dying()
+    {
+        GetComponent<CharacterController>().enabled = false;
+        GetComponent<InputController>().enabled = false;
+        var timeRemain = dyingTime;
+        var startRotation = transform.rotation;
+        var startEuler = startRotation.eulerAngles;
+        startEuler.x = -90;
+        var endRotation = Quaternion.Euler(startEuler);
+        while ((timeRemain -= Time.deltaTime) > 0)
+        {
+            transform.rotation = Quaternion.Slerp(endRotation, startRotation, timeRemain / dyingTime);
+            yield return null;
+        }
+        Destroy(this);
+        //TODO: zmienić na wysłanie końca gry do gamemanagera
+
     }
     
 }
