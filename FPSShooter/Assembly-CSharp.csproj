@@ -67,6 +67,7 @@
     <Compile Include="Assets\Enemies\Hitbox\Hitbox.cs" />
     <Compile Include="Assets\Enemies\Scripts\Enemy.cs" />
     <Compile Include="Assets\Enemies\Zombie\Scripts\Zombie.cs" />
+    <Compile Include="Assets\ParticleSystem\Scripts\HitMarkLifeController.cs" />
     <Compile Include="Assets\Player\Scripts\InputController.cs" />
     <Compile Include="Assets\Player\Scripts\Player.cs" />
     <Compile Include="Assets\PostProcessing\Scripts\TintCameraPP.cs" />

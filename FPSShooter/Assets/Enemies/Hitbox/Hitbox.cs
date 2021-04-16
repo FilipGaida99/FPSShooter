@@ -7,13 +7,14 @@ public class Hitbox : MonoBehaviour
 {
     [SerializeField]
     private float attackMultiplier = 1;
-    private Collider collider;
 
+    private Collider collider;
 
     // Start is called before the first frame update
     void Awake()
     {
         collider = GetComponent<Collider>();
+
         if(collider == null)
         {
             Debug.LogError("No collider in hitbox:" + gameObject.name);

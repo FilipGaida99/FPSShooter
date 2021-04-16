@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Zombie : Enemy
 {
-
+   
     [Header("Animator Mapping")]
     public string IsAliveAnimatorParameter = "IsAlive";
     public string IsAttackingAnimatorParameter = "IsAttacking";
@@ -28,9 +28,9 @@ public class Zombie : Enemy
 
     private Animator animator;
 
-    bool isMoving = false;
-    bool isRunning = false;
-    bool isAttacking = false;
+    private bool isMoving = false;
+    private bool isRunning = false;
+    private bool isAttacking = false;
 
     private void OnDrawGizmosSelected()
     {
@@ -124,7 +124,7 @@ public class Zombie : Enemy
         float attackOffset = 0.7f;
 
         yield return new WaitForSeconds(attackOffset);
-        if (IsPlayerInDistance(Vector3.up))
+        if (IsPlayerInDistance(Vector3.up) && IsAlive)
         {
             //Deal damage
             player.DealDamage(damage);

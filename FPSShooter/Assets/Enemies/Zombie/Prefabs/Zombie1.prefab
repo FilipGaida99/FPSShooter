@@ -1764,7 +1764,7 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 1.06, z: 0}
 --- !u!114 &1044331790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1777,9 +1777,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b871ac0de41b203478208fc60ad0a300, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitMarkerPrefab: {fileID: 3910412268607376124, guid: 408941ed94cb18c4da120c961da65f8f,
+    type: 3}
   AttackDistance: 2
   maxLife: 5
-  steps: 10
   yDelta: 3
   waitTime: 1
   timeOfDying: 1
@@ -3088,6 +3089,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3660009025035086490}
     m_Modifications:
+    - target: {fileID: 2597288256955385318, guid: b45ca18f6e64e16438c86a77d39ba865,
+        type: 3}
+      propertyPath: attackMultiplier
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2640425181913825778, guid: b45ca18f6e64e16438c86a77d39ba865,
         type: 3}
       propertyPath: m_Name
@@ -3188,6 +3194,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7849909225841866114}
     m_Modifications:
+    - target: {fileID: 2597288256955385318, guid: b45ca18f6e64e16438c86a77d39ba865,
+        type: 3}
+      propertyPath: attackMultiplier
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2640425181913825778, guid: b45ca18f6e64e16438c86a77d39ba865,
         type: 3}
       propertyPath: m_Name
@@ -3288,6 +3299,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3989546061244958339}
     m_Modifications:
+    - target: {fileID: 2597288256955385318, guid: b45ca18f6e64e16438c86a77d39ba865,
+        type: 3}
+      propertyPath: attackMultiplier
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2640425181913825778, guid: b45ca18f6e64e16438c86a77d39ba865,
         type: 3}
       propertyPath: m_Name
@@ -3388,6 +3404,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1608017155184299671}
     m_Modifications:
+    - target: {fileID: 2597288256955385318, guid: b45ca18f6e64e16438c86a77d39ba865,
+        type: 3}
+      propertyPath: attackMultiplier
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2640425181913825778, guid: b45ca18f6e64e16438c86a77d39ba865,
         type: 3}
       propertyPath: m_Name
@@ -3488,6 +3509,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3989546061244958339}
     m_Modifications:
+    - target: {fileID: 2597288256955385318, guid: b45ca18f6e64e16438c86a77d39ba865,
+        type: 3}
+      propertyPath: attackMultiplier
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2640425181913825778, guid: b45ca18f6e64e16438c86a77d39ba865,
         type: 3}
       propertyPath: m_Name
@@ -3588,6 +3614,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3312264254057291506}
     m_Modifications:
+    - target: {fileID: 2597288256955385318, guid: b45ca18f6e64e16438c86a77d39ba865,
+        type: 3}
+      propertyPath: attackMultiplier
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2640425181913825778, guid: b45ca18f6e64e16438c86a77d39ba865,
         type: 3}
       propertyPath: m_Name
@@ -3693,6 +3724,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2666804134560604886}
     m_Modifications:
+    - target: {fileID: 2597288256955385318, guid: b45ca18f6e64e16438c86a77d39ba865,
+        type: 3}
+      propertyPath: attackMultiplier
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2640425181913825778, guid: b45ca18f6e64e16438c86a77d39ba865,
         type: 3}
       propertyPath: m_Name
@@ -3898,6 +3934,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6697741321985201734}
     m_Modifications:
+    - target: {fileID: 2597288256955385318, guid: b45ca18f6e64e16438c86a77d39ba865,
+        type: 3}
+      propertyPath: attackMultiplier
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2640425181913825778, guid: b45ca18f6e64e16438c86a77d39ba865,
         type: 3}
       propertyPath: m_Name
@@ -4003,6 +4044,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2566083444669634969}
     m_Modifications:
+    - target: {fileID: 2597288256955385318, guid: b45ca18f6e64e16438c86a77d39ba865,
+        type: 3}
+      propertyPath: attackMultiplier
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2640425181913825778, guid: b45ca18f6e64e16438c86a77d39ba865,
         type: 3}
       propertyPath: m_Name
@@ -4108,10 +4154,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1608017155184299671}
     m_Modifications:
+    - target: {fileID: 2597288256955385318, guid: b45ca18f6e64e16438c86a77d39ba865,
+        type: 3}
+      propertyPath: attackMultiplier
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2640425181913825778, guid: b45ca18f6e64e16438c86a77d39ba865,
         type: 3}
       propertyPath: m_Name
-      value: HitboxSphere (1)
+      value: HitboxSphere
       objectReference: {fileID: 0}
     - target: {fileID: 4350167546023501492, guid: b45ca18f6e64e16438c86a77d39ba865,
         type: 3}
@@ -4208,6 +4259,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8195457672599474506}
     m_Modifications:
+    - target: {fileID: 2597288256955385318, guid: b45ca18f6e64e16438c86a77d39ba865,
+        type: 3}
+      propertyPath: attackMultiplier
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2640425181913825778, guid: b45ca18f6e64e16438c86a77d39ba865,
         type: 3}
       propertyPath: m_Name
@@ -4394,6 +4450,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1841581597277393199}
     m_Modifications:
+    - target: {fileID: 2597288256955385318, guid: b45ca18f6e64e16438c86a77d39ba865,
+        type: 3}
+      propertyPath: attackMultiplier
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2640425181913825778, guid: b45ca18f6e64e16438c86a77d39ba865,
         type: 3}
       propertyPath: m_Name
@@ -4499,6 +4560,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6195574577297854756}
     m_Modifications:
+    - target: {fileID: 2597288256955385318, guid: b45ca18f6e64e16438c86a77d39ba865,
+        type: 3}
+      propertyPath: attackMultiplier
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2640425181913825778, guid: b45ca18f6e64e16438c86a77d39ba865,
         type: 3}
       propertyPath: m_Name

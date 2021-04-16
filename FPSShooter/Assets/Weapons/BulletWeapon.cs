@@ -35,9 +35,9 @@ public abstract class BulletWeapon : MonoBehaviour, Weapon
 
     public abstract float ReloadTime { get; }
 
-    public int Magazine { get => magazine; set => magazine = value; }
-    public int BulletsLeft { get => bullets; set => bullets = value; }
-    public float Damage { get => damage; set => damage = value; }
+    virtual public int Magazine { get => magazine; set => magazine = value; }
+    virtual public int BulletsLeft { get => bullets; set => bullets = value; }
+    virtual public float Damage { get => damage; set => damage = value; }
 
     void OnDrawGizmosSelected()
     {

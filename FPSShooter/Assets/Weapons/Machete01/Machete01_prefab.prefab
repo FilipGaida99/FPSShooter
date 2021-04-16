@@ -12,7 +12,9 @@ GameObject:
   - component: {fileID: 3393746}
   - component: {fileID: 2347250}
   - component: {fileID: 6948938364105016227}
-  m_Layer: 0
+  - component: {fileID: 9207135071009785992}
+  - component: {fileID: 2442414178425619246}
+  m_Layer: 10
   m_Name: Machete01_prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,4 +95,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 3.4028235e+38
-  maxDistance: 1.5
+  maxSwingAngle: 90
+  swingTime: 0.5
+--- !u!65 &9207135071009785992
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 115572}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5685377, y: 0.15462695, z: 0.043785412}
+  m_Center: {x: 0.28496397, y: 0.0080387, z: 0}
+--- !u!54 &2442414178425619246
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 115572}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0

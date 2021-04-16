@@ -8,16 +8,17 @@ public abstract class Enemy : MonoBehaviour
     public float Life { get; private set; }
     public bool IsAlive { get => Life > 0; }
 
+    [Header("Hit Marker")]
+    public GameObject hitMarkerPrefab;
+
     protected Player player;
     protected CharacterController characterController;
 
+    [Header("Living Parameters")]
     [SerializeField]
     protected float AttackDistance = 2;
-
     [SerializeField]
     private float maxLife = 5;
-
-    
 
     [Header("Dying Parameters")]
     [SerializeField]
@@ -51,6 +52,7 @@ public abstract class Enemy : MonoBehaviour
     virtual public void TakeDamage(float damage, Vector3 position)
     {
         Life -= damage;
+        Instantiate(hitMarkerPrefab, position, Quaternion.identity, transform);
         if (!IsAlive)
         {
             Die();

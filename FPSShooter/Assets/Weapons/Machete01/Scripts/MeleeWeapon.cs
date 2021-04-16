@@ -11,17 +11,20 @@ public class MeleeWeapon : MonoBehaviour, Weapon
     [SerializeField]
     private float swingTime = 0.5f;
 
-
-
     private bool animating = false;
     private bool wasReleased = true;
     private bool combination = false;
 
-    public int Magazine { get => 0; set {} }
-    public int BulletsLeft { get => 0; set { } }
-    public float Damage { get => damage; set => damage = value; }
+    private Collider collider;
 
+    virtual public int Magazine { get => 0; set {} }
+    virtual public int BulletsLeft { get => 0; set { } }
+    virtual public float Damage { get => damage; set => damage = value; }
 
+    public void Awake()
+    {
+        collider = GetComponent<Collider>();
+    }
 
     public void OnEnable()
     {
@@ -30,24 +33,33 @@ public class MeleeWeapon : MonoBehaviour, Weapon
         combination = false;
     }
 
-    public void Reload()
+    public void OnCollisionEnter(Collision collision)
+    {
+        var hitbox = collision.gameObject.GetComponent<Hitbox>();
+        if(hitbox != null)
+        {
+            hitbox.Hit(Damage, collider.ClosestPoint(hitbox.transform.position));
+        }
+    }
+
+    virtual public void Reload()
     {
         
     }
 
-    public bool ResupplyBullets()
+    virtual public bool ResupplyBullets()
     {
         return false;
     }
 
-    public bool Shoot(Vector3 from, Vector3 direction)
+    virtual public bool Shoot(Vector3 from, Vector3 direction)
     {
 
         if (!animating && wasReleased) {
             animating = true;
             wasReleased = false;
             combination = false;
-            StartCoroutine(Animate());
+            StartCoroutine(AnimateSwing());
         }
         else if(animating && wasReleased)
         {
@@ -64,61 +76,85 @@ public class MeleeWeapon : MonoBehaviour, Weapon
         }
     }
 
-    private IEnumerator Animate()
+    virtual public void OnChoose()
+    {
+
+    }
+
+    virtual public void OnHide()
+    {
+
+    }
+
+    #region Animations
+    virtual protected IEnumerator AnimateSwing()
     {
         //TODO:Turn on/off colisions.
         var startPosition = transform.localPosition;
         var startRotation = transform.localRotation;
         //Start
         {
-            int steps = 10;
             float angle = 90;
             float time = swingTime / 5;
-            for (int i = 0; i < steps; i++)
+            float actualAngle = 0;
+            while (Mathf.Abs(actualAngle) < Mathf.Abs(angle))
             {
-                transform.Rotate(Vector3.up, angle / steps);
-                yield return new WaitForSeconds(time / steps);
+                float angleDelta = angle * Time.deltaTime / time;
+                actualAngle += angleDelta;
+                transform.Rotate(Vector3.up, angleDelta);
+
+                yield return null;
             }
         }
         //Slash
         {
-            int steps = 100;
+
             float angle = -maxSwingAngle;
             float time = 4 * swingTime / 5;
-            for (int i = 0; i < steps; i++)
+            float actualAngle = 0;
+            while (Mathf.Abs(actualAngle) < Mathf.Abs(angle))
             {
-                transform.RotateAround(transform.parent.position, transform.parent.up, angle / steps);
-                yield return new WaitForSeconds(time / steps);
+                float angleDelta = angle * Time.deltaTime / time;
+                actualAngle += angleDelta;
+                transform.RotateAround(transform.parent.position, transform.parent.up, angleDelta);
+
+                yield return null;
             }
 
-          
         }
         //If combination - return with hit.
         if (combination)
         {
             combination = false;
             {
-                int steps = 10;
-                float angle = 180;
+
+                float angleX = 150;
+                float angleY = -50;
                 float time = swingTime / 5;
-                for (int i = 0; i < steps; i++)
+                float actualAngle = 0;
+                while (Mathf.Abs(actualAngle) < Mathf.Abs(angleX))
                 {
-                    transform.Rotate(Vector3.right, angle / steps);
-                    transform.Rotate(transform.parent.up, -50 / steps);
-                    yield return new WaitForSeconds(time / steps);
+                    float angleDelta = angleX * Time.deltaTime / time;
+                    actualAngle += angleDelta;
+
+                    transform.Rotate(Vector3.right, angleDelta);
+                    transform.Rotate(transform.parent.up, angleY * Time.deltaTime / time);
+                    yield return null;
                 }
             }
 
             {
-                int steps = 100;
                 float angle = maxSwingAngle;
                 float time = 4 * swingTime / 5;
-                for (int i = 0; i < steps; i++)
+                float actualAngle = 0;
+                while (Mathf.Abs(actualAngle) < Mathf.Abs(angle))
                 {
-                    transform.RotateAround(transform.parent.position, transform.parent.up, angle / steps);
-                    yield return new WaitForSeconds(time / steps);
-                }
+                    float angleDelta = angle * Time.deltaTime / time;
+                    actualAngle += angleDelta;
 
+                    transform.RotateAround(transform.parent.position, transform.parent.up, angleDelta);
+                    yield return null;
+                }
             }
         }
 
@@ -127,13 +163,17 @@ public class MeleeWeapon : MonoBehaviour, Weapon
         var endRotation = transform.localRotation;
         {
             int steps = 20;
-            float time = 0.2f;
-            for (int i = 0; i < steps; i++)
+            float time = 0.1f;
+            float elapsedTime = 0;
+            while (elapsedTime < time)
             {
-                transform.localPosition = Vector3.Lerp(endPosition, startPosition, i / (float)steps);
-                transform.localRotation = Quaternion.Slerp(endRotation, startRotation, i / (float)steps);
+                elapsedTime += Time.deltaTime;
+                transform.localPosition = Vector3.Lerp(endPosition, startPosition, elapsedTime/time);
+                transform.localRotation = Quaternion.Slerp(endRotation, startRotation, elapsedTime/time);
                 yield return new WaitForSeconds(time / steps);
             }
+            transform.localPosition = Vector3.Lerp(endPosition, startPosition, 1);
+            transform.localRotation = Quaternion.Slerp(endRotation, startRotation, 1);
         }
 
         animating = false;
@@ -142,13 +182,5 @@ public class MeleeWeapon : MonoBehaviour, Weapon
         yield break;
     }
 
-    public void OnChoose()
-    {
-        
-    }
-
-    public void OnHide()
-    {
-        
-    }
+    #endregion
 }
