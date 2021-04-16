@@ -12,6 +12,7 @@ public class TintCameraPP : MonoBehaviour
     public float tintValue = 0;
     public bool isAutoDim;
     public float dimSpeed = 1;
+    public AnimationCurve fadingCurve;
 
     private int tintValueID;
 
@@ -23,7 +24,7 @@ public class TintCameraPP : MonoBehaviour
     private void OnRenderImage(RenderTexture source, RenderTexture destination)
     {
         material.color = color;
-        material.SetFloat(tintValueID, tintValue);
+        material.SetFloat(tintValueID, fadingCurve.Evaluate(tintValue));
         Graphics.Blit(source, destination, material);
 
     }

@@ -64,12 +64,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Enemies\Hitbox\Hitbox.cs" />
-    <Compile Include="Assets\Enemies\Scripts\Enemy.cs" />
-    <Compile Include="Assets\Enemies\Zombie\Scripts\Zombie.cs" />
+    <Compile Include="Assets\Characters\Enemies\Hitbox\Hitbox.cs" />
+    <Compile Include="Assets\Characters\Enemies\Scripts\Enemy.cs" />
+    <Compile Include="Assets\Characters\Enemies\Zombie\Scripts\Zombie.cs" />
+    <Compile Include="Assets\Characters\Player\Scripts\InputController.cs" />
+    <Compile Include="Assets\Characters\Player\Scripts\Player.cs" />
+    <Compile Include="Assets\Characters\Scripts\CharacterAudioController.cs" />
+    <Compile Include="Assets\Characters\Scripts\CharacterState.cs" />
     <Compile Include="Assets\ParticleSystem\Scripts\HitMarkLifeController.cs" />
-    <Compile Include="Assets\Player\Scripts\InputController.cs" />
-    <Compile Include="Assets\Player\Scripts\Player.cs" />
     <Compile Include="Assets\PostProcessing\Scripts\TintCameraPP.cs" />
     <Compile Include="Assets\Weapons\Aiming\ShootTrace.cs" />
     <Compile Include="Assets\Weapons\BulletWeapon.cs" />

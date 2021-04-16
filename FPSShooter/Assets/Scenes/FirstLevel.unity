@@ -121,29 +121,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &758575771 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6516181514590853371, guid: f6adf60a0f90e73489747922bdfc9b81,
-    type: 3}
-  m_PrefabInstance: {fileID: 1202674918}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &758575775
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 758575771}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3862ae491c842d4fb8ba00ca7a7e5f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  material: {fileID: 2100000, guid: e67fe011417e611498c827e2f45c0139, type: 2}
-  color: {r: 1, g: 0, b: 0, a: 0}
-  tintValue: 0
-  isAutoDim: 1
-  dimSpeed: 1
 --- !u!1 &810576915
 GameObject:
   m_ObjectHideFlags: 0
@@ -342,14 +319,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2021153022, guid: f6adf60a0f90e73489747922bdfc9b81, type: 3}
-      propertyPath: maxLife
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2021153022, guid: f6adf60a0f90e73489747922bdfc9b81, type: 3}
-      propertyPath: dyingTime
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6516181514845368387, guid: f6adf60a0f90e73489747922bdfc9b81,
         type: 3}
       propertyPath: m_Name
