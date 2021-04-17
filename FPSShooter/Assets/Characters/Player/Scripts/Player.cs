@@ -123,6 +123,15 @@ public class Player : MonoBehaviour
         ChangeWeapon(newChose);
     }
 
+    virtual public void SetRecoilFromMove(float value)
+    {
+        var weapon = weapons[chosedWeapon] as RecoilingWeapon;
+        if(weapon != null)
+        {
+            weapon.RecoilMagnitude = Mathf.Max(weapon.RecoilMagnitude, value);
+        }
+    }
+
     private bool InstantiateWeapon(GameObject prefab)
     {
         if (prefab == null)

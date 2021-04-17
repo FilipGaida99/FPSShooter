@@ -16,6 +16,11 @@ public class InputController : MonoBehaviour
     public float lookXLimit = 45.0f;
     public float mouseRollTreshold = 0.1f;
 
+    [Header("Recoil from Moving")]
+    public float runningRecoil = 1;
+    public float jumpingRecoil = 1;
+    public float walkingRecoil = 0.4f;
+
     [HideInInspector]
     public bool canMove = true;
     private CharacterController characterController;
@@ -72,6 +77,8 @@ public class InputController : MonoBehaviour
         {
             player.ChangeWeaponToNext(Input.mouseScrollDelta.y > 0 ? 1 : -1);
         }
+
+        player.SetRecoilFromMove(GetRecoilFromMoveValue());
     }
     private void UpdateMovement()
     {
@@ -131,6 +138,26 @@ public class InputController : MonoBehaviour
             transform.Rotate(Vector3.right, rotationX, Space.World);
             transform.Rotate(Vector3.up, rotationY, Space.World);
         }
+    }
+
+    private float GetRecoilFromMoveValue()
+    {
+        if (IsWalking)
+        {
+            if (isRunning)
+            {
+                return runningRecoil;
+            }
+            else
+            {
+                return walkingRecoil;
+            }
+        }
+        else if (!characterController.isGrounded)
+        {
+            return jumpingRecoil;
+        }
+        return 0;
     }
 
     private bool IsWalking { get { return new Vector2(moveDirection.x, moveDirection.z) != Vector2.zero && characterController.isGrounded; } }

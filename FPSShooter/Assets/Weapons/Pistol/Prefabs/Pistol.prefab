@@ -127,6 +127,103 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 529d37abaa5266245ae244ce3b7a80c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  recoilCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 10
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  aimDispersionCurveX:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.037205152
+      outSlope: 0.037205152
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.05797687
+    - serializedVersion: 3
+      time: 1
+      value: 0.22156917
+      inSlope: 0.49200445
+      outSlope: 0.49200445
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.04150796
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  aimDispersionCurveY:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.02420238
+      outSlope: 0.02420238
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.076988764
+    - serializedVersion: 3
+      time: 1
+      value: 0.15585327
+      inSlope: 0.23404668
+      outSlope: 0.23404668
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.061308086
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  scaleAimImageToRecoil:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 2
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  recoilReturnSpeed: 3
   maxDistance: 100
   maxMagazine: 10
   maxBullets: 300
