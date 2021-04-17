@@ -48,9 +48,9 @@ public class Pistol : BulletWeapon
         }
     }
 
-    public override void OnChoose()
+    public override void OnShow()
     {
-        base.OnChoose(); 
+        base.OnShow(); 
         //Reset animation.
         animation.Play();
         StartCoroutine(StopAnimation());

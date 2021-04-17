@@ -63,6 +63,11 @@ public class InputController : MonoBehaviour
             player.Reload();
         }
 
+        if (Input.GetButtonDown("Quick Attack"))
+        {
+            player.QuickAttack();
+        }
+
         if (Mathf.Abs(Input.mouseScrollDelta.y) > mouseRollTreshold)
         {
             player.ChangeWeaponToNext(Input.mouseScrollDelta.y > 0 ? 1 : -1);

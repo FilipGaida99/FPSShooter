@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class Player : MonoBehaviour
 {
     public float Life { get; private set;}
@@ -31,10 +30,15 @@ public class Player : MonoBehaviour
 
     private CharacterAudioController characterAudioController;
 
-
+    [Header("Weapon Change Parameters")]
+    private Transform weaponSack;
+    private bool isChanging;
+    private int newWeapon;
+    [SerializeField]
+    private float hideShowTime = 0.1f;
 
     // Start is called before the first frame update
-    void Awake()
+    virtual public void Awake()
     {
         weapons = new List<Weapon>();
         weaponsObjects = new List<GameObject>();
@@ -45,9 +49,10 @@ public class Player : MonoBehaviour
             InstantiateWeapon(prefab);
         }
         characterAudioController = GetComponent<CharacterAudioController>();
+        weaponSack = transform.Find("WeaponSack");
     }
 
-    private void Start()
+    virtual public void Start()
     {
         foreach(var weaponObject in weaponsObjects)
         {
@@ -57,23 +62,31 @@ public class Player : MonoBehaviour
         weaponsObjects[chosedWeapon].SetActive(true);
     }
 
-    public void Shoot()
+    virtual public void Shoot()
     {
-        if(weapons[chosedWeapon] != null)
+        if(weapons[chosedWeapon] != null && !isChanging)
         {
             weapons[chosedWeapon].Shoot(transform.position, transform.forward);
         }
     }
 
-    public void Reload()
+    virtual public void Reload()
     {
-        if (weapons[chosedWeapon] != null)
+        if (weapons[chosedWeapon] != null && !isChanging)
         {
             weapons[chosedWeapon].Reload();
         }
     }
 
-    public bool DealDamage(float damage)
+    virtual public void QuickAttack()
+    {
+        if (!isChanging)
+        {
+            StartCoroutine(QuickAttackRoutine());
+        }
+    }
+
+    virtual public bool TakeDamage(float damage)
     {
         Life -= damage;
         characterAudioController.state = CharacterState.Suffering;
@@ -87,38 +100,16 @@ public class Player : MonoBehaviour
         return !IsAlive;
     }
 
-    private bool InstantiateWeapon(GameObject prefab)
+    virtual public void ChangeWeapon(int newChosed)
     {
-        if(prefab == null)
+        if (!isChanging && chosedWeapon != newChosed)
         {
-            return false;
+            newWeapon = newChosed;
+            StartCoroutine(HideShowWeapon(weaponsObjects[newChosed], weaponsObjects[chosedWeapon], weaponsPrefabs[newChosed].transform));
         }
-        var weapon = prefab.GetComponent<Weapon>();
-        if(weapon == null)
-        {
-            return false;
-        }
-        var newWeapon = Instantiate(prefab, transform);
-        weaponsObjects.Add(newWeapon);
-        weapons.Add(newWeapon.GetComponent<Weapon>());
-        return true;
     }
 
-    public void ChangeWeapon(int newChosed)
-    {
-        //Show/hide
-        weapons[chosedWeapon].OnHide();
-        weaponsObjects[chosedWeapon].SetActive(false);
-        chosedWeapon = newChosed;
-        weaponsObjects[chosedWeapon].SetActive(true);
-
-        //TODO:usunąć bo to głupie
-        weaponsObjects[chosedWeapon].transform.localPosition = weaponsPrefabs[chosedWeapon].transform.localPosition;
-        weaponsObjects[chosedWeapon].transform.localRotation = weaponsPrefabs[chosedWeapon].transform.localRotation;
-        weapons[chosedWeapon].OnChoose();
-    }
-
-    public void ChangeWeaponToNext(int direction)
+    virtual public void ChangeWeaponToNext(int direction)
     {
         var newChose = chosedWeapon + direction;
         if(newChose >= weapons.Count)
@@ -132,10 +123,83 @@ public class Player : MonoBehaviour
         ChangeWeapon(newChose);
     }
 
-    private bool HideShowWeapon(GameObject newShowed, GameObject newHidden)
+    private bool InstantiateWeapon(GameObject prefab)
     {
-        //TODO zrobić pojawianie sie broni
-        return false;
+        if (prefab == null)
+        {
+            return false;
+        }
+        var weapon = prefab.GetComponent<Weapon>();
+        if (weapon == null)
+        {
+            return false;
+        }
+        var newWeapon = Instantiate(prefab, transform);
+        weaponsObjects.Add(newWeapon);
+        weapons.Add(newWeapon.GetComponent<Weapon>());
+        return true;
+    }
+
+    private void ChangeCallback(GameObject newShowed, GameObject newHidden)
+    {
+        weapons[chosedWeapon].OnHide();
+        newHidden.SetActive(false);
+        chosedWeapon = newWeapon;
+        newShowed.SetActive(true);
+        weapons[chosedWeapon].OnShow();
+    }
+
+    private IEnumerator QuickAttackRoutine()
+    {
+        var previousChoosed = chosedWeapon;
+        ChangeWeapon(meleeWeaponIndex);
+
+        while (isChanging)
+        {
+            yield return null;
+        }
+
+        Shoot();
+
+        while (!weapons[chosedWeapon].IsReady)
+        {
+            yield return null;
+        }
+
+        ChangeWeapon(previousChoosed);
+    }
+
+    #region Animations
+    private IEnumerator HideShowWeapon(GameObject newShowed, GameObject newHidden, Transform showedPosition)
+    {
+
+        isChanging = true;
+        yield return AnimateHideShow(newHidden, newHidden.transform, weaponSack);
+
+        ChangeCallback(newShowed, newHidden);
+
+        yield return AnimateHideShow(newShowed, weaponSack, showedPosition);
+        isChanging = false;
+    }
+
+    private IEnumerator AnimateHideShow(GameObject weapon, Transform start, Transform end)
+    {
+        float elapsedTime = 0;
+        var startPosition = start.localPosition;
+        var startRotation = start.localRotation;
+
+        var endPosition = end.localPosition;
+        var endRotation = end.localRotation;
+
+        while (elapsedTime <= hideShowTime)
+        {
+            weapon.transform.localPosition = Vector3.Lerp(startPosition, endPosition, elapsedTime / hideShowTime);
+            weapon.transform.localRotation = Quaternion.Slerp(startRotation, endRotation, elapsedTime / hideShowTime);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        weapon.transform.localPosition = endPosition;
+        weapon.transform.localRotation = endRotation;
     }
 
     private IEnumerator Dying()
@@ -156,5 +220,5 @@ public class Player : MonoBehaviour
         //TODO: zmienić na wysłanie końca gry do gamemanagera
 
     }
-    
+    #endregion
 }

@@ -6,8 +6,9 @@ public interface Weapon
 {
     int Magazine { get; set; }
     int BulletsLeft { get; set; }
-
     float Damage { get; set; }
+
+    bool IsReady { get; }
 
     //Return true, when shoot was performed.
     bool Shoot(Vector3 from, Vector3 direction);
@@ -16,7 +17,7 @@ public interface Weapon
 
     bool ResupplyBullets();
 
-    void OnChoose();
+    void OnShow();
 
     void OnHide();
 }

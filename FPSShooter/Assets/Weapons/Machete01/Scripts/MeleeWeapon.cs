@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MeleeWeapon : MonoBehaviour, Weapon
 {
@@ -11,6 +12,9 @@ public class MeleeWeapon : MonoBehaviour, Weapon
     [SerializeField]
     private float swingTime = 0.5f;
 
+    [SerializeField]
+    private Sprite aim;
+
     private bool animating = false;
     private bool wasReleased = true;
     private bool combination = false;
@@ -20,6 +24,8 @@ public class MeleeWeapon : MonoBehaviour, Weapon
     virtual public int Magazine { get => 0; set {} }
     virtual public int BulletsLeft { get => 0; set { } }
     virtual public float Damage { get => damage; set => damage = value; }
+
+    virtual public bool IsReady => !animating;
 
     public void Awake()
     {
@@ -76,14 +82,24 @@ public class MeleeWeapon : MonoBehaviour, Weapon
         }
     }
 
-    virtual public void OnChoose()
+    virtual public void OnShow()
     {
-
+        SetAimImage(aim);
     }
 
     virtual public void OnHide()
     {
 
+    }
+
+    //Todo: Do gamemanagera
+    private void SetAimImage(Sprite sprite)
+    {
+        var aimingUI = GameObject.FindGameObjectWithTag("Aim").GetComponent<Image>();
+        if (aimingUI != null)
+        {
+            aimingUI.sprite = sprite;
+        }
     }
 
     #region Animations
@@ -172,8 +188,8 @@ public class MeleeWeapon : MonoBehaviour, Weapon
                 transform.localRotation = Quaternion.Slerp(endRotation, startRotation, elapsedTime/time);
                 yield return new WaitForSeconds(time / steps);
             }
-            transform.localPosition = Vector3.Lerp(endPosition, startPosition, 1);
-            transform.localRotation = Quaternion.Slerp(endRotation, startRotation, 1);
+            transform.localPosition = startPosition;
+            transform.localRotation = startRotation;
         }
 
         animating = false;

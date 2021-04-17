@@ -19,6 +19,7 @@ public abstract class BulletWeapon : MonoBehaviour, Weapon
     private float leftToReload;
     [SerializeField]
     private float damage = 2;
+
     [Header("Prefabs")]
     [SerializeField]
     private GameObject linePrefab;
@@ -38,6 +39,8 @@ public abstract class BulletWeapon : MonoBehaviour, Weapon
     virtual public int Magazine { get => magazine; set => magazine = value; }
     virtual public int BulletsLeft { get => bullets; set => bullets = value; }
     virtual public float Damage { get => damage; set => damage = value; }
+
+    virtual public bool IsReady => !reloading;
 
     void OnDrawGizmosSelected()
     {
@@ -151,6 +154,7 @@ public abstract class BulletWeapon : MonoBehaviour, Weapon
         }
     }
 
+    //Todo: Do gamemanagera
     private void SetAimImage(Sprite sprite) {
         var aimingUI = GameObject.FindGameObjectWithTag("Aim").GetComponent<Image>();
         if (aimingUI != null)
@@ -159,7 +163,7 @@ public abstract class BulletWeapon : MonoBehaviour, Weapon
         }
     }
 
-    virtual public void OnChoose()
+    virtual public void OnShow()
     {
         SetAimImage(aim);
     }

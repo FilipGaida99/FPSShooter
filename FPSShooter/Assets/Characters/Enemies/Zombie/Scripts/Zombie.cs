@@ -131,7 +131,7 @@ public class Zombie : Enemy
         if (IsPlayerInDistance(Vector3.up) && IsAlive)
         {
             //Deal damage
-            player.DealDamage(damage);
+            player.TakeDamage(damage);
         }
         isAttacking = false;
         yield break;
