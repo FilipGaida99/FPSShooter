@@ -4,55 +4,39 @@ using UnityEngine;
 
 public class Pistol : BulletWeapon
 {
-    private bool wasReleased = true;
-    private new Animation animation;
+    private Animation reloadAnimation;
 
     public override float ReloadTime { 
         get { 
-            if(animation == null)
+            if(reloadAnimation == null)
             {
                 return 4.0f;
             }
-            return animation.clip.length; 
+            return reloadAnimation.clip.length; 
         } 
     }
 
-    override public void Awake()
+    public override void Awake()
     {
         base.Awake();
-        animation = GetComponent<Animation>();
+        reloadAnimation = GetComponent<Animation>();
     }
 
-    public override void Reload()
+    public override bool Reload()
     {
-        base.Reload();
-        animation.Play();
-    }
-
-    override public bool Shoot(Vector3 from, Vector3 direction)
-    {
-        if (wasReleased)
+        if (base.Reload())
         {
-            wasReleased = false;
-            return base.Shoot(from, direction);
+            reloadAnimation.Play();
+            return true;
         }
         return false;
-    }
-
-    override public void Update()
-    {
-        base.Update();
-        if(!wasReleased && !Input.GetMouseButton(0))
-        {
-            wasReleased = true;
-        }
     }
 
     public override void OnShow()
     {
         base.OnShow(); 
         //Reset animation.
-        animation.Play();
+        reloadAnimation.Play();
         StartCoroutine(StopAnimation());
     }
 
@@ -64,7 +48,7 @@ public class Pistol : BulletWeapon
     private IEnumerator StopAnimation()
     {
         yield return null;
-        animation.Stop();
+        reloadAnimation.Stop();
         yield break;
     }
 }

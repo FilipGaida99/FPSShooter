@@ -48,9 +48,9 @@ public class MeleeWeapon : MonoBehaviour, Weapon
         }
     }
 
-    virtual public void Reload()
+    virtual public bool Reload()
     {
-        
+        return false;
     }
 
     virtual public bool ResupplyBullets()

@@ -83,9 +83,11 @@
     <Compile Include="Assets\Weapons\Aiming\ShootTrace.cs" />
     <Compile Include="Assets\Weapons\Machete01\Scripts\MeleeWeapon.cs" />
     <Compile Include="Assets\Weapons\Pistol\Scripts\Pistol.cs" />
+    <Compile Include="Assets\Weapons\Rifle\Scripts\Rifle.cs" />
     <Compile Include="Assets\Weapons\Scripts\BulletWeapon.cs" />
     <Compile Include="Assets\Weapons\Scripts\RecoilingWeapon.cs" />
     <Compile Include="Assets\Weapons\Scripts\Weapon.cs" />
+    <Compile Include="Assets\Weapons\Shotgun\Scripts\Shotgun.cs" />
     <None Include="Assets\PostProcessing\Materials\Tint.shader" />
     <Reference Include="UnityEngine">
       <HintPath>F:/unity base/Editor/2019.4.24f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>

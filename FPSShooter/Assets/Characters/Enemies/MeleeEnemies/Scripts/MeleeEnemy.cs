@@ -23,7 +23,7 @@ public abstract class MeleeEnemy : StandardEnemy
         }
     }
 
-    override protected IEnumerator AttackRoutine()
+    protected override IEnumerator AttackRoutine()
     {
         animator.SetTrigger(IsAttackingID);
         isAttacking = true;

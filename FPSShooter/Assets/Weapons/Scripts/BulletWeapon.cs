@@ -11,6 +11,8 @@ public abstract class BulletWeapon : MonoBehaviour, Weapon, RecoilingWeapon
     public AnimationCurve aimDispersionCurveX;
     public AnimationCurve aimDispersionCurveY;
     public AnimationCurve scaleAimImageToRecoil;
+    public bool isSemiAuto = false;
+    protected bool wasReleased = true;
     [SerializeField]
     private float recoilReturnSpeed = 1;
     private float recoilMagnitude = 0;
@@ -56,6 +58,12 @@ public abstract class BulletWeapon : MonoBehaviour, Weapon, RecoilingWeapon
 
     virtual public float RecoilMagnitude { get => recoilMagnitude; set => recoilMagnitude = Mathf.Clamp01(value); }
 
+    virtual public bool WeaponReadyForReload { get => !reloading && bullets > 0; }
+
+    virtual public bool CanShootOnSemiAuto { get => isSemiAuto ? wasReleased : true; }
+
+    virtual public bool WeaponReadyForShoot { get => true; }
+
     void OnDrawGizmosSelected()
     {
         // Draw a yellow sphere at the transform's position with max shoot distance
@@ -76,9 +84,29 @@ public abstract class BulletWeapon : MonoBehaviour, Weapon, RecoilingWeapon
         shootingPoint = transform.Find("ShootingPoint");
     }
 
-    virtual public void Reload()
+    virtual public void Update()
     {
-        if (!reloading && bullets > 0)
+        if (reloading)
+        {
+            UpdateReload();
+        }
+        else
+        {
+            leftToReload = ReloadTime;
+        }
+
+        if (isSemiAuto)
+        {
+            UpdateSemiAutoMechanism();
+        }
+
+
+        AdjustRecoil();
+    }
+
+    virtual public bool Reload()
+    {
+        if (WeaponReadyForReload)
         {
             audioSource.clip = reloadSound;
             audioSource.Play();
@@ -88,54 +116,29 @@ public abstract class BulletWeapon : MonoBehaviour, Weapon, RecoilingWeapon
             leftToReload = ReloadTime;
 
             recoilMagnitude = 0;
+            return true;
         }
+        return false;
     }
 
     virtual public bool Shoot(Vector3 from, Vector3 direction)
     {
         //Checking if can shoot.
-        if (reloading || bullets <= 0)
+        if (!WeaponReadyForReload || !CanShootOnSemiAuto || !WeaponReadyForShoot)
         {
             return false; 
         }
-        if(magazine <= 0 && bullets > 0)
+
+        if (TryReloadIfEmpty())
         {
-            Reload();
             return false;
         }
+
         magazine--;
+        wasReleased = false;
 
-        //Actual shoot
-        audioSource.clip = shootSound;
-        audioSource.Play();
-
-        RaycastHit hit;
-        Vector3 hitPoint;
-        LayerMask mask = LayerMask.GetMask("Character");
-        int maskValue = mask.value;
-        maskValue = ~maskValue;
-        direction += GetDispersionVector();
-        if (Physics.Raycast(from, direction, out hit, maxDistance, maskValue))
-        {
-            hitPoint = hit.point;
-            //TODO cast Enemy.
-            var target = hit.collider.gameObject.GetComponent<DestroyAble>();
-            if (target != null)
-            {
-                target.TakeDamage(damage, hitPoint);
-            }
-        }
-        else
-        {
-            //There was no hit, just draw trace.
-            hitPoint = from + direction * maxDistance;
-        }
-
-        //Draw trace
-        var traceObject = Instantiate(linePrefab);
-        var trace = traceObject.GetComponent<ShootTrace>();
-        var farest = from + direction * maxDistance;
-        trace.DrawLine(shootingPoint.position, hitPoint);
+        Vector3 hitPoint = SingleShoot(from, direction);
+        DrawTrace(hitPoint);
 
         recoilMagnitude = 1;
 
@@ -151,30 +154,6 @@ public abstract class BulletWeapon : MonoBehaviour, Weapon, RecoilingWeapon
         bullets = maxBullets;
         magazine = maxMagazine;
         return true;
-    }
-
-    virtual public void Update()
-    {
-        if (reloading)
-        {
-            leftToReload -= Time.deltaTime;
-            if(leftToReload < 0)
-            {
-                reloading = false;
-                SetAimImage(aim);
-                if(bullets - maxMagazine < 0)
-                {
-                    magazine = bullets;
-                    bullets = 0;
-                }
-                else
-                {
-                    magazine = maxMagazine;
-                    bullets -= maxMagazine;
-                }
-            }
-        }
-        AdjustRecoil();
     }
 
     //Todo: Do gamemanagera
@@ -199,6 +178,7 @@ public abstract class BulletWeapon : MonoBehaviour, Weapon, RecoilingWeapon
     virtual public void OnShow()
     {
         recoilMagnitude = 0;
+        audioSource.Stop();
         SetAimImage(aim);
     }
 
@@ -206,6 +186,54 @@ public abstract class BulletWeapon : MonoBehaviour, Weapon, RecoilingWeapon
     {
         //Stop reloading.
         reloading = false;
+    }
+
+    virtual protected Vector3 SingleShoot(Vector3 from, Vector3 direction)
+    {
+        audioSource.clip = shootSound;
+        audioSource.Play();
+
+        RaycastHit hit;
+        Vector3 hitPoint;
+        LayerMask mask = LayerMask.GetMask("Character");
+        int maskValue = mask.value;
+        maskValue = ~maskValue;
+        direction += GetDispersionVector();
+
+        if (Physics.Raycast(from, direction, out hit, maxDistance, maskValue))
+        {
+            hitPoint = hit.point;
+            //TODO cast Enemy.
+            var target = hit.collider.gameObject.GetComponent<DestroyAble>();
+            if (target != null)
+            {
+                target.TakeDamage(damage, hitPoint);
+            }
+        }
+        else
+        {
+            //There was no hit, just draw trace.
+            hitPoint = from + direction * maxDistance;
+        }
+
+        return hitPoint;
+    }
+
+    virtual protected void DrawTrace(Vector3 hitPoint)
+    {
+        var traceObject = Instantiate(linePrefab);
+        var trace = traceObject.GetComponent<ShootTrace>();
+        trace.DrawLine(shootingPoint.position, hitPoint);
+    }
+
+    protected bool TryReloadIfEmpty()
+    {
+        if (magazine <= 0 && bullets > 0)
+        {
+            Reload();
+            return true;
+        }
+        return false;
     }
 
     private void AdjustRecoil()
@@ -226,5 +254,33 @@ public abstract class BulletWeapon : MonoBehaviour, Weapon, RecoilingWeapon
         result.y = Random.Range(0, aimDispersionCurveY.Evaluate(recoilMagnitude));
         result.z = 0;
         return result;
+    }
+
+    private void UpdateReload()
+    {
+        leftToReload -= Time.deltaTime;
+        if (leftToReload < 0)
+        {
+            reloading = false;
+            SetAimImage(aim);
+            if (bullets - maxMagazine < 0)
+            {
+                magazine = bullets;
+                bullets = 0;
+            }
+            else
+            {
+                magazine = maxMagazine;
+                bullets -= maxMagazine;
+            }
+        }
+    }
+
+    private void UpdateSemiAutoMechanism()
+    {
+        if (!wasReleased && !Input.GetMouseButton(0))
+        {
+            wasReleased = true;
+        }
     }
 }
