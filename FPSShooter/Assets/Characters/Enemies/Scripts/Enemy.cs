@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Enemy : MonoBehaviour
+public abstract class Enemy : MonoBehaviour, DestroyAble
 {
-    static int Count;
     public float Life { get; private set; }
     public bool IsAlive { get => Life > 0; }
 
@@ -35,7 +34,6 @@ public abstract class Enemy : MonoBehaviour
     // Start is called before the first frame update
     virtual public void Awake()
     {
-        Count++;
         Life = maxLife;
         player = FindObjectOfType<Player>();
         characterController = GetComponent<CharacterController>();

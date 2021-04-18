@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, DestroyAble
 {
     public float Life { get; private set;}
     public bool IsAlive { get => Life > 0; }
@@ -86,7 +86,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    virtual public bool TakeDamage(float damage)
+    virtual public void TakeDamage(float damage, Vector3 hitPoint)
     {
         Life -= damage;
         characterAudioController.state = CharacterState.Suffering;
@@ -97,7 +97,6 @@ public class Player : MonoBehaviour
             StartCoroutine(Dying());
         }
         characterAudioController.UpdateSound();
-        return !IsAlive;
     }
 
     virtual public void ChangeWeapon(int newChosed)

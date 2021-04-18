@@ -65,12 +65,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Characters\Enemies\Hitbox\Hitbox.cs" />
+    <Compile Include="Assets\Characters\Enemies\MeleeEnemies\Scripts\MeleeEnemy.cs" />
+    <Compile Include="Assets\Characters\Enemies\MeleeEnemies\Zombie\Scripts\Zombie.cs" />
     <Compile Include="Assets\Characters\Enemies\Scripts\Enemy.cs" />
-    <Compile Include="Assets\Characters\Enemies\Zombie\Scripts\Zombie.cs" />
+    <Compile Include="Assets\Characters\Enemies\Scripts\StandardEnemy.cs" />
+    <Compile Include="Assets\Characters\Enemies\ThrowingEnemies\Projectiles\Scripts\Projectile.cs" />
+    <Compile Include="Assets\Characters\Enemies\ThrowingEnemies\Projectiles\Scripts\RotatingProjectile.cs" />
+    <Compile Include="Assets\Characters\Enemies\ThrowingEnemies\Scripts\ThrowingEnemy.cs" />
+    <Compile Include="Assets\Characters\Enemies\ThrowingEnemies\Titan\Scripts\Titan.cs" />
     <Compile Include="Assets\Characters\Player\Scripts\InputController.cs" />
     <Compile Include="Assets\Characters\Player\Scripts\Player.cs" />
     <Compile Include="Assets\Characters\Scripts\CharacterAudioController.cs" />
     <Compile Include="Assets\Characters\Scripts\CharacterState.cs" />
+    <Compile Include="Assets\Characters\Scripts\DestroyAble.cs" />
     <Compile Include="Assets\ParticleSystem\Scripts\HitMarkLifeController.cs" />
     <Compile Include="Assets\PostProcessing\Scripts\TintCameraPP.cs" />
     <Compile Include="Assets\Weapons\Aiming\ShootTrace.cs" />

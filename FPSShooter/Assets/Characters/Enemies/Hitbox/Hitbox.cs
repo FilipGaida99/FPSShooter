@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
-public class Hitbox : MonoBehaviour
+public class Hitbox : MonoBehaviour, DestroyAble
 {
     [SerializeField]
     private float attackMultiplier = 1;
@@ -21,7 +21,7 @@ public class Hitbox : MonoBehaviour
         }
     }
 
-    public void Hit(float damage, Vector3 hitPoint)
+    public void TakeDamage(float damage, Vector3 hitPoint)
     {
         var enemy = GetComponentInParent<Enemy>();
         if(enemy != null)

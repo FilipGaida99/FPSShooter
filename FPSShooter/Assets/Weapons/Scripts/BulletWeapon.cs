@@ -119,10 +119,10 @@ public abstract class BulletWeapon : MonoBehaviour, Weapon, RecoilingWeapon
         {
             hitPoint = hit.point;
             //TODO cast Enemy.
-            var hitbox = hit.collider.gameObject.GetComponent<Hitbox>();
-            if (hitbox != null)
+            var target = hit.collider.gameObject.GetComponent<DestroyAble>();
+            if (target != null)
             {
-                hitbox.Hit(damage, hitPoint);
+                target.TakeDamage(damage, hitPoint);
             }
         }
         else

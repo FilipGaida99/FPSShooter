@@ -41,10 +41,10 @@ public class MeleeWeapon : MonoBehaviour, Weapon
 
     public void OnCollisionEnter(Collision collision)
     {
-        var hitbox = collision.gameObject.GetComponent<Hitbox>();
-        if(hitbox != null)
+        var target = collision.gameObject.GetComponent<DestroyAble>();
+        if(target != null)
         {
-            hitbox.Hit(Damage, collider.ClosestPoint(hitbox.transform.position));
+            target.TakeDamage(Damage, collision.collider.ClosestPoint(transform.position));
         }
     }
 
