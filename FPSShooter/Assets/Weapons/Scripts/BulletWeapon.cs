@@ -46,6 +46,8 @@ public abstract class BulletWeapon : MonoBehaviour, Weapon, RecoilingWeapon
 
     private AudioSource audioSource;
 
+    private int layerMaskValue;
+
     public abstract float ReloadTime { get; }
 
     virtual public int Magazine { get => magazine; set => magazine = value; }
@@ -81,7 +83,10 @@ public abstract class BulletWeapon : MonoBehaviour, Weapon, RecoilingWeapon
         bullets = maxBullets;
         reloading = false;
         audioSource = GetComponent<AudioSource>();
-        shootingPoint = transform.Find("ShootingPoint");
+        shootingPoint = GetComponentInChildren<ShootingPosition>().transform;
+        LayerMask mask = LayerMask.GetMask("Character");
+        layerMaskValue = mask.value;
+        layerMaskValue = ~layerMaskValue;
     }
 
     virtual public void Update()
@@ -195,12 +200,9 @@ public abstract class BulletWeapon : MonoBehaviour, Weapon, RecoilingWeapon
 
         RaycastHit hit;
         Vector3 hitPoint;
-        LayerMask mask = LayerMask.GetMask("Character");
-        int maskValue = mask.value;
-        maskValue = ~maskValue;
         direction += GetDispersionVector();
 
-        if (Physics.Raycast(from, direction, out hit, maxDistance, maskValue))
+        if (Physics.Raycast(from, direction, out hit, maxDistance, layerMaskValue))
         {
             hitPoint = hit.point;
             //TODO cast Enemy.

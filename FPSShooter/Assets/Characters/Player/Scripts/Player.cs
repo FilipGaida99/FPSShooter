@@ -49,7 +49,7 @@ public class Player : MonoBehaviour, DestroyAble
             InstantiateWeapon(prefab);
         }
         characterAudioController = GetComponent<CharacterAudioController>();
-        weaponSack = transform.Find("WeaponSack");
+        weaponSack = GetComponentInChildren<WeaponSack>().transform;
     }
 
     virtual public void Start()

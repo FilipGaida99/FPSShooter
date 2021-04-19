@@ -74,10 +74,14 @@
     <Compile Include="Assets\Characters\Enemies\ThrowingEnemies\Scripts\ThrowingEnemy.cs" />
     <Compile Include="Assets\Characters\Enemies\ThrowingEnemies\Titan\Scripts\Titan.cs" />
     <Compile Include="Assets\Characters\Player\Scripts\InputController.cs" />
+    <Compile Include="Assets\Characters\Player\Scripts\InputEvent.cs" />
     <Compile Include="Assets\Characters\Player\Scripts\Player.cs" />
     <Compile Include="Assets\Characters\Scripts\CharacterAudioController.cs" />
     <Compile Include="Assets\Characters\Scripts\CharacterState.cs" />
     <Compile Include="Assets\Characters\Scripts\DestroyAble.cs" />
+    <Compile Include="Assets\EnemySpawner\Scripts\BilboardPortal.cs" />
+    <Compile Include="Assets\EnemySpawner\Scripts\EnemyCountCalculation.cs" />
+    <Compile Include="Assets\EnemySpawner\Scripts\EnemySpawner.cs" />
     <Compile Include="Assets\ParticleSystem\Scripts\HitMarkLifeController.cs" />
     <Compile Include="Assets\PostProcessing\Scripts\TintCameraPP.cs" />
     <Compile Include="Assets\Weapons\Aiming\ShootTrace.cs" />
@@ -86,7 +90,9 @@
     <Compile Include="Assets\Weapons\Rifle\Scripts\Rifle.cs" />
     <Compile Include="Assets\Weapons\Scripts\BulletWeapon.cs" />
     <Compile Include="Assets\Weapons\Scripts\RecoilingWeapon.cs" />
+    <Compile Include="Assets\Weapons\Scripts\ShootingPosition.cs" />
     <Compile Include="Assets\Weapons\Scripts\Weapon.cs" />
+    <Compile Include="Assets\Weapons\Scripts\WeaponSack.cs" />
     <Compile Include="Assets\Weapons\Shotgun\Scripts\Shotgun.cs" />
     <None Include="Assets\PostProcessing\Materials\Tint.shader" />
     <Reference Include="UnityEngine">

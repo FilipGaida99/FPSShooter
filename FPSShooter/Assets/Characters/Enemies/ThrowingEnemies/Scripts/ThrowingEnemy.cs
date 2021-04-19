@@ -19,7 +19,7 @@ public abstract class ThrowingEnemy : StandardEnemy
     public override void Awake()
     {
         base.Awake();
-        shootingPosition = transform.Find("ShootingPosition");
+        shootingPosition = GetComponentInChildren<ShootingPosition>().transform;
         StartHuntPlayer(0.5f, 10f);
     }
 

@@ -1,11 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 
 public class InputController : MonoBehaviour
 {
-
     [Header("Moving Parameters")]
     public float walkingSpeed = 7.5f;
     public float runningSpeed = 11.5f;
@@ -34,6 +34,7 @@ public class InputController : MonoBehaviour
     private Player player;
     private CharacterAudioController characterAudio;
 
+    public List<InputEvent> buttonActions;
 
     private void Awake()
     {
@@ -58,19 +59,9 @@ public class InputController : MonoBehaviour
 
     private void UpdateWeapons()
     {
-        if (Input.GetMouseButton(0))
+        foreach (var buttonAction in buttonActions)
         {
-            player.Shoot();
-        }
-
-        if (Input.GetButtonDown("Reload"))
-        {
-            player.Reload();
-        }
-
-        if (Input.GetButtonDown("Quick Attack"))
-        {
-            player.QuickAttack();
+            buttonAction.Invoke();
         }
 
         if (Mathf.Abs(Input.mouseScrollDelta.y) > mouseRollTreshold)
