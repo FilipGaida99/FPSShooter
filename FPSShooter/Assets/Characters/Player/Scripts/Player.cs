@@ -54,12 +54,16 @@ public class Player : MonoBehaviour, DestroyAble
 
     virtual public void Start()
     {
-        foreach(var weaponObject in weaponsObjects)
+        for(int i = 0; i< weaponsObjects.Count; i++)
         {
-            weaponObject.SetActive(false);
+            InGameUIController.Instance.weaponChoose.SetWeaponSlot(i, weapons[i].Icon, (i + 1).ToString());
+            weaponsObjects[i].SetActive(false);
         }
         chosedWeapon = primaryWeapon;
         weaponsObjects[chosedWeapon].SetActive(true);
+        InGameUIController.Instance.weaponChoose.ChooseWeapon(chosedWeapon, false);
+        RefreshBulletsUI();
+        InGameUIController.Instance.healthBar.SetHealth(Life, maxLife);
     }
 
     virtual public void Shoot()
@@ -67,6 +71,7 @@ public class Player : MonoBehaviour, DestroyAble
         if(weapons[chosedWeapon] != null && !isChanging)
         {
             weapons[chosedWeapon].Shoot(transform.position, transform.forward);
+            RefreshBulletsUI();
         }
     }
 
@@ -91,6 +96,7 @@ public class Player : MonoBehaviour, DestroyAble
         Life -= damage;
         characterAudioController.state = CharacterState.Suffering;
         tintCamera.tintValue = 0.7f;
+        InGameUIController.Instance.healthBar.SetHealth(Life, maxLife);
         if (!IsAlive)
         {
             characterAudioController.state = CharacterState.Dying;
@@ -101,24 +107,26 @@ public class Player : MonoBehaviour, DestroyAble
 
     virtual public void ChangeWeapon(int newChosed)
     {
+        if (newChosed >= weapons.Count)
+        {
+            newChosed = 0;
+        }
+        else if (newChosed < 0)
+        {
+            newChosed = weapons.Count - 1;
+        }
+
         if (!isChanging && chosedWeapon != newChosed)
         {
             newWeapon = newChosed;
             StartCoroutine(HideShowWeapon(weaponsObjects[newChosed], weaponsObjects[chosedWeapon], weaponsPrefabs[newChosed].transform));
+            InGameUIController.Instance.weaponChoose.ChooseWeapon(newChosed);
         }
     }
 
     virtual public void ChangeWeaponToNext(int direction)
     {
         var newChose = chosedWeapon + direction;
-        if(newChose >= weapons.Count)
-        {
-            newChose = 0;
-        }
-        else if (newChose < 0)
-        {
-            newChose = weapons.Count - 1;
-        }
         ChangeWeapon(newChose);
     }
 
@@ -145,7 +153,13 @@ public class Player : MonoBehaviour, DestroyAble
         var newWeapon = Instantiate(prefab, transform);
         weaponsObjects.Add(newWeapon);
         weapons.Add(newWeapon.GetComponent<Weapon>());
+
         return true;
+    }
+
+    private void RefreshBulletsUI()
+    {
+        InGameUIController.Instance.SetMagazineAndBullets(weapons[chosedWeapon].Magazine, weapons[chosedWeapon].BulletsLeft);
     }
 
     private void ChangeCallback(GameObject newShowed, GameObject newHidden)
@@ -155,6 +169,7 @@ public class Player : MonoBehaviour, DestroyAble
         chosedWeapon = newWeapon;
         newShowed.SetActive(true);
         weapons[chosedWeapon].OnShow();
+        RefreshBulletsUI();
     }
 
     private IEnumerator QuickAttackRoutine()

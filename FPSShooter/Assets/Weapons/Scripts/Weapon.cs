@@ -4,11 +4,15 @@ using UnityEngine;
 
 public interface Weapon
 {
-    int Magazine { get; set; }
-    int BulletsLeft { get; set; }
+    uint Magazine { get; set; }
+
+    uint BulletsLeft { get; set; }
+
     float Damage { get; set; }
 
     bool IsReady { get; }
+
+    Sprite Icon { get; }
 
     //Return true, when shoot was performed.
     bool Shoot(Vector3 from, Vector3 direction);

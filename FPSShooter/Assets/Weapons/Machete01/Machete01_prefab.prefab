@@ -98,6 +98,7 @@ MonoBehaviour:
   maxSwingAngle: 90
   swingTime: 0.5
   aim: {fileID: 21300000, guid: 47a7b226b80ca774fa98f7e2fd0b1997, type: 3}
+  icon: {fileID: 21300000, guid: 47a7b226b80ca774fa98f7e2fd0b1997, type: 3}
 --- !u!65 &9207135071009785992
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -22,11 +22,11 @@ public abstract class BulletWeapon : MonoBehaviour, Weapon, RecoilingWeapon
     [SerializeField]
     private float maxDistance = 100;
     [SerializeField]
-    private int maxMagazine = 10;
+    private uint maxMagazine = 10;
     [SerializeField]
-    private int maxBullets = 300;
-    private int magazine;
-    private int bullets;
+    private uint maxBullets = 300;
+    private uint magazine;
+    private uint bullets;
     private bool reloading;
     private float leftToReload;
     [SerializeField]
@@ -40,6 +40,8 @@ public abstract class BulletWeapon : MonoBehaviour, Weapon, RecoilingWeapon
     [SerializeField]
     private Sprite aim;
     [SerializeField]
+    private Sprite icon;
+    [SerializeField]
     private AudioClip shootSound;
     [SerializeField]
     private AudioClip reloadSound;
@@ -50,13 +52,15 @@ public abstract class BulletWeapon : MonoBehaviour, Weapon, RecoilingWeapon
 
     public abstract float ReloadTime { get; }
 
-    virtual public int Magazine { get => magazine; set => magazine = value; }
+    virtual public uint Magazine { get => magazine; set => magazine = value; }
 
-    virtual public int BulletsLeft { get => bullets; set => bullets = value; }
+    virtual public uint BulletsLeft { get => bullets; set => bullets = value; }
 
     virtual public float Damage { get => damage; set => damage = value; }
 
     virtual public bool IsReady => !reloading;
+
+    virtual public Sprite Icon => icon;
 
     virtual public float RecoilMagnitude { get => recoilMagnitude; set => recoilMagnitude = Mathf.Clamp01(value); }
 
@@ -116,7 +120,7 @@ public abstract class BulletWeapon : MonoBehaviour, Weapon, RecoilingWeapon
             audioSource.clip = reloadSound;
             audioSource.Play();
 
-            SetAimImage(reload);
+            InGameUIController.Instance.aimUI.SetImage(reload);
             reloading = true;
             leftToReload = ReloadTime;
 
@@ -161,30 +165,11 @@ public abstract class BulletWeapon : MonoBehaviour, Weapon, RecoilingWeapon
         return true;
     }
 
-    //Todo: Do gamemanagera
-    private void SetAimImage(Sprite sprite) {
-        var aimingUI = GameObject.FindGameObjectWithTag("Aim").GetComponent<Image>();
-        if (aimingUI != null)
-        {
-            aimingUI.sprite = sprite;
-        }
-    }
-
-    //Todo: To też do gamemanagera
-    private void SetAimImageScale(float scale)
-    {
-        var aimingUI = GameObject.FindGameObjectWithTag("Aim").GetComponent<Image>();
-        if (aimingUI != null)
-        {
-            aimingUI.transform.localScale = new Vector3(scale, scale, scale);
-        }
-    }
-
     virtual public void OnShow()
     {
         recoilMagnitude = 0;
         audioSource.Stop();
-        SetAimImage(aim);
+        InGameUIController.Instance.aimUI.SetImage(aim);
     }
 
     virtual public void OnHide()
@@ -245,7 +230,7 @@ public abstract class BulletWeapon : MonoBehaviour, Weapon, RecoilingWeapon
         lastRecoilMagnitude = recoilMagnitude;
         recoilMagnitude -= recoilReturnSpeed * Time.deltaTime;
         recoilMagnitude = Mathf.Clamp01(recoilMagnitude);
-        SetAimImageScale(scaleAimImageToRecoil.Evaluate(recoilMagnitude));
+        InGameUIController.Instance.aimUI.SetImageScale(scaleAimImageToRecoil.Evaluate(recoilMagnitude));
     }
 
     private Vector3 GetDispersionVector()
@@ -264,7 +249,7 @@ public abstract class BulletWeapon : MonoBehaviour, Weapon, RecoilingWeapon
         if (leftToReload < 0)
         {
             reloading = false;
-            SetAimImage(aim);
+            InGameUIController.Instance.aimUI.SetImage(aim);
             if (bullets - maxMagazine < 0)
             {
                 magazine = bullets;
@@ -272,15 +257,16 @@ public abstract class BulletWeapon : MonoBehaviour, Weapon, RecoilingWeapon
             }
             else
             {
+                bullets -= maxMagazine - magazine;
                 magazine = maxMagazine;
-                bullets -= maxMagazine;
             }
+            InGameUIController.Instance.SetMagazineAndBullets(Magazine, bullets);
         }
     }
 
     private void UpdateSemiAutoMechanism()
     {
-        if (!wasReleased && !Input.GetMouseButton(0))
+        if (!wasReleased && !Input.GetButton("Fire1"))
         {
             wasReleased = true;
         }

@@ -14,23 +14,22 @@ public class MeleeWeapon : MonoBehaviour, Weapon
 
     [SerializeField]
     private Sprite aim;
+    [SerializeField]
+    private Sprite icon;
 
     private bool animating = false;
     private bool wasReleased = true;
     private bool combination = false;
 
-    private Collider collider;
+    virtual public uint Magazine { get => 0; set {} }
 
-    virtual public int Magazine { get => 0; set {} }
-    virtual public int BulletsLeft { get => 0; set { } }
+    virtual public uint BulletsLeft { get => 0; set { } }
+
     virtual public float Damage { get => damage; set => damage = value; }
 
     virtual public bool IsReady => !animating;
 
-    public void Awake()
-    {
-        collider = GetComponent<Collider>();
-    }
+    virtual public Sprite Icon => icon;
 
     public void OnEnable()
     {
@@ -76,7 +75,7 @@ public class MeleeWeapon : MonoBehaviour, Weapon
 
     virtual public void Update()
     {
-        if (!wasReleased && !Input.GetMouseButton(0))
+        if (!wasReleased && !Input.GetButton("Fire1"))
         {
             wasReleased = true;
         }

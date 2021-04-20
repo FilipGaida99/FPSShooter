@@ -407,7 +407,8 @@ MonoBehaviour:
   linePrefab: {fileID: 574958882617173250, guid: 61aa839e9b3095d4788a32439cdbd25b,
     type: 3}
   reload: {fileID: 21300000, guid: 905ef8e0945e46642a11b52a215f6265, type: 3}
-  aim: {fileID: 21300000, guid: 49f721be9935d9345a8cdc0fb081fc34, type: 3}
+  aim: {fileID: 21300000, guid: 3dfb9e29e075abe45b5f436fbe9ecb87, type: 3}
+  icon: {fileID: 21300000, guid: 565d5f143bd2da441a215884b7648499, type: 3}
   shootSound: {fileID: 8300000, guid: 7b6740ee86cb042b489ce4abcec89fd1, type: 3}
   reloadSound: {fileID: 8300000, guid: da6ff895ffe0ddd469e179a668861d69, type: 3}
   lockTime: 0.1
