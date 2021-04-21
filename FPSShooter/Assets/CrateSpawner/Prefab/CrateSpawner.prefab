@@ -226,9 +226,9 @@ MonoBehaviour:
   cratePrefab: {fileID: 3410500283201936475, guid: 953176eb8591f9c43ae292313289c618,
     type: 3}
   possibleWeapons:
-  - {fileID: 149444, guid: 3d3a4f5fcb4669e4396a9e4382609315, type: 3}
   - {fileID: 100004, guid: 9a21925963ad72641b17d3da3e0c173f, type: 3}
   - {fileID: 571609115304590253, guid: 7d6d6a8f9e5e62d45ae99aa283b89a20, type: 3}
+  - {fileID: 149444, guid: 3d3a4f5fcb4669e4396a9e4382609315, type: 3}
 --- !u!1 &6405662069478217078
 GameObject:
   m_ObjectHideFlags: 0

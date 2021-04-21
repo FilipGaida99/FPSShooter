@@ -376,6 +376,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabDistance: 2.8
+  maxWeaponCount: 4
   maxLife: 20
   weaponsPrefabs:
   - {fileID: 115572, guid: 0d72c17103b886f4ebd560637450ecc3, type: 3}

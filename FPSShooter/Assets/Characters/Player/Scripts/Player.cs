@@ -9,6 +9,8 @@ public class Player : MonoBehaviour, DestroyAble
 
     [SerializeField]
     private float grabDistance = 1;
+    [SerializeField]
+    private int maxWeaponCount = 4;
 
     [SerializeField]
     private float maxLife = 100;
@@ -115,21 +117,20 @@ public class Player : MonoBehaviour, DestroyAble
 
     virtual public bool AddWeapon(GameObject prefab)
     {
-        for(int i=0; i< weaponsPrefabs.Count; i++)
-        {
-            if(prefab == weaponsPrefabs[i])
-            {
-                bool result = weapons[i].ResupplyBullets();
-                RefreshBulletsUI();
-                return result;
-            }
+        bool wasResupplied = false;
+        if(ResuplyAmunition(prefab, out wasResupplied)){
+            return wasResupplied;
         }
 
-        weaponsPrefabs.Add(prefab);
-        InstantiateWeapon(prefab);
-        PrepareWeapon(weapons.Count - 1);
-        ChangeWeapon(weapons.Count - 1);
+        if ((weaponsPrefabs.Count + 1) > maxWeaponCount)
+        {
+            ReplaceWeapon(prefab);
 
+        }
+        else
+        {
+            GrabNewWeapon(prefab);
+        }
         return true;
     }
 
@@ -192,6 +193,48 @@ public class Player : MonoBehaviour, DestroyAble
         {
             weapon.RecoilMagnitude = Mathf.Max(weapon.RecoilMagnitude, value);
         }
+    }
+
+    private bool ResuplyAmunition(GameObject prefab, out bool resupplyResult)
+    {
+        for (int i = 0; i < weaponsPrefabs.Count; i++)
+        {
+            if (prefab == weaponsPrefabs[i])
+            {
+                resupplyResult = weapons[i].ResupplyBullets();
+                RefreshBulletsUI();
+                return true;
+            }
+        }
+        resupplyResult = false;
+        return false;
+    }
+
+    private void GrabNewWeapon(GameObject prefab)
+    {
+        weaponsPrefabs.Add(prefab);
+        InstantiateWeapon(prefab);
+        PrepareWeapon(weapons.Count - 1);
+        ChangeWeapon(weapons.Count - 1);
+    }
+    private void ReplaceWeapon(GameObject prefab)
+    {
+        var indexToErase = chosedWeapon;
+        if (indexToErase == meleeWeaponIndex)
+        {
+            indexToErase++;
+            if (indexToErase >= weaponsPrefabs.Count)
+            {
+                indexToErase = 0;
+            }
+        }
+        weaponsPrefabs[indexToErase] = prefab;
+        Destroy(weaponsObjects[indexToErase]);
+        weaponsObjects[indexToErase] = Instantiate(prefab, transform);
+        weapons[indexToErase] = weaponsObjects[indexToErase].GetComponent<Weapon>();
+        
+        PrepareWeapon(indexToErase);
+        ChangeWeapon(indexToErase - 1);
     }
 
     private bool InstantiateWeapon(GameObject prefab)
