@@ -79,9 +79,17 @@
     <Compile Include="Assets\Characters\Scripts\CharacterAudioController.cs" />
     <Compile Include="Assets\Characters\Scripts\CharacterState.cs" />
     <Compile Include="Assets\Characters\Scripts\DestroyAble.cs" />
+    <Compile Include="Assets\CrateSpawner\Scripts\CrateSpawner.cs" />
+    <Compile Include="Assets\Crates\FirstAid\Scripts\FirstAid.cs" />
+    <Compile Include="Assets\Crates\FirstAid\Scripts\FirstAidFactory.cs" />
+    <Compile Include="Assets\Crates\GunCrate\Scripts\GunCrate.cs" />
+    <Compile Include="Assets\Crates\GunCrate\Scripts\GunCrateFactory.cs" />
+    <Compile Include="Assets\Crates\Scripts\CrateFactory.cs" />
+    <Compile Include="Assets\Crates\Scripts\SupplyCrate.cs" />
     <Compile Include="Assets\EnemySpawner\Scripts\BilboardPortal.cs" />
     <Compile Include="Assets\EnemySpawner\Scripts\EnemyCountCalculation.cs" />
     <Compile Include="Assets\EnemySpawner\Scripts\EnemySpawner.cs" />
+    <Compile Include="Assets\Flare\Scripts\Flare.cs" />
     <Compile Include="Assets\ParticleSystem\Scripts\HitMarkLifeController.cs" />
     <Compile Include="Assets\PostProcessing\Scripts\TintCameraPP.cs" />
     <Compile Include="Assets\UI\Menu.cs" />

@@ -347,6 +347,22 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  - inputKey: Grab
+    Repeatable: 0
+    Function:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2021153022}
+          m_MethodName: TryGrab
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &2021153022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -359,12 +375,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5242e994ca4d2c64e90d6cf150399a79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLife: 10
+  grabDistance: 2.8
+  maxLife: 20
   weaponsPrefabs:
   - {fileID: 115572, guid: 0d72c17103b886f4ebd560637450ecc3, type: 3}
   - {fileID: 149444, guid: 3d3a4f5fcb4669e4396a9e4382609315, type: 3}
-  - {fileID: 100004, guid: 9a21925963ad72641b17d3da3e0c173f, type: 3}
-  - {fileID: 571609115304590253, guid: 7d6d6a8f9e5e62d45ae99aa283b89a20, type: 3}
   meleeWeaponIndex: 0
   primaryWeapon: 1
   dyingTime: 1

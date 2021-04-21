@@ -156,7 +156,7 @@ public abstract class BulletWeapon : MonoBehaviour, Weapon, RecoilingWeapon
 
     public bool ResupplyBullets()
     {
-        if(bullets == maxBullets)
+        if(bullets == maxBullets && magazine == maxMagazine)
         {
             return false;
         }
