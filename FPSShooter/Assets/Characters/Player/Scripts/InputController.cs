@@ -51,18 +51,35 @@ public class InputController : MonoBehaviour
         player = GetComponent<Player>();
         characterAudio = GetComponent<CharacterAudioController>();
     }
-    private void Start()
-    {
-        // Lock cursor
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-    }
 
     private void Update()
     {
-        UpdateMovement();
-        UpdateWeapons();
-        characterAudio.UpdateSound();
+        if (!PauseManager.Instance.isPaused)
+        {
+            UpdateMovement();
+            UpdateWeapons();
+            characterAudio.UpdateSound();
+        }
+    }
+
+    public float GetRecoilFromMoveValue()
+    {
+        if (IsWalking)
+        {
+            if (isRunning)
+            {
+                return runningRecoil;
+            }
+            else
+            {
+                return walkingRecoil;
+            }
+        }
+        else if (!characterController.isGrounded)
+        {
+            return jumpingRecoil;
+        }
+        return 0;
     }
 
 
@@ -138,26 +155,6 @@ public class InputController : MonoBehaviour
             transform.Rotate(Vector3.right, rotationX, Space.World);
             transform.Rotate(Vector3.up, rotationY, Space.World);
         }
-    }
-
-    private float GetRecoilFromMoveValue()
-    {
-        if (IsWalking)
-        {
-            if (isRunning)
-            {
-                return runningRecoil;
-            }
-            else
-            {
-                return walkingRecoil;
-            }
-        }
-        else if (!characterController.isGrounded)
-        {
-            return jumpingRecoil;
-        }
-        return 0;
     }
 
     private bool IsWalking { get { return new Vector2(moveDirection.x, moveDirection.z) != Vector2.zero && characterController.isGrounded; } }

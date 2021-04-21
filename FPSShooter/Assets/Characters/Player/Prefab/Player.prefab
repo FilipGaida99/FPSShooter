@@ -197,14 +197,21 @@ MonoBehaviour:
   gravity: 20
   lookSpeed: 2
   lookXLimit: 45
-  mouseRollTreshold: 0.1
+  mouseRollTreshold: 0.03
   runningRecoil: 1
   jumpingRecoil: 1
   walkingRecoil: 0.4
   canMove: 1
+  verticalAxis: Vertical
+  horizontalAxis: Horizontal
+  mouseAxisX: Mouse X
+  mouseAxisY: Mouse Y
+  jumpButton: Jump
+  mouseScroll: Mouse ScrollWheel
+  runButton: Run
   buttonActions:
   - inputKey: Fire1
-    Repeatable: 1
+    type: 0
     Function:
       m_PersistentCalls:
         m_Calls:
@@ -220,7 +227,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   - inputKey: Reload
-    Repeatable: 0
+    type: 0
     Function:
       m_PersistentCalls:
         m_Calls:
@@ -236,7 +243,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   - inputKey: Quick Attack
-    Repeatable: 0
+    type: 0
     Function:
       m_PersistentCalls:
         m_Calls:
@@ -252,7 +259,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   - inputKey: Weapon1
-    Repeatable: 0
+    type: 0
     Function:
       m_PersistentCalls:
         m_Calls:
@@ -268,7 +275,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   - inputKey: Weapon2
-    Repeatable: 0
+    type: 0
     Function:
       m_PersistentCalls:
         m_Calls:
@@ -284,7 +291,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   - inputKey: Weapon3
-    Repeatable: 0
+    type: 0
     Function:
       m_PersistentCalls:
         m_Calls:
@@ -300,7 +307,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   - inputKey: Weapon4
-    Repeatable: 0
+    type: 0
     Function:
       m_PersistentCalls:
         m_Calls:
@@ -316,7 +323,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   - inputKey: Next Weapon
-    Repeatable: 0
+    type: 0
     Function:
       m_PersistentCalls:
         m_Calls:
@@ -332,7 +339,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   - inputKey: Previous Weapon
-    Repeatable: 0
+    type: 0
     Function:
       m_PersistentCalls:
         m_Calls:
@@ -348,12 +355,28 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   - inputKey: Grab
-    Repeatable: 0
+    type: 0
     Function:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 2021153022}
           m_MethodName: TryGrab
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - inputKey: Fire1
+    type: 3
+    Function:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2021153022}
+          m_MethodName: FreeTrigger
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

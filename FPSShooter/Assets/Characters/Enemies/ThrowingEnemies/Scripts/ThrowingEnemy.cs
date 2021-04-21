@@ -7,6 +7,7 @@ public abstract class ThrowingEnemy : StandardEnemy
     public List<GameObject> projectilePrefabs;
     public float TimeBetweenAttacks = 1;
 
+    [SerializeField]
     private Transform shootingPosition;
 
     [SerializeField]
@@ -19,7 +20,6 @@ public abstract class ThrowingEnemy : StandardEnemy
     public override void Awake()
     {
         base.Awake();
-        shootingPosition = GetComponentInChildren<ShootingPosition>().transform;
         StartHuntPlayer(0.5f, 10f);
     }
 

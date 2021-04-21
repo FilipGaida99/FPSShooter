@@ -182,10 +182,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6721192665022835240, guid: b43f8b98ad7f8b64fa6da31ff2e8376f,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6944856756586733984, guid: b43f8b98ad7f8b64fa6da31ff2e8376f,
         type: 3}
       propertyPath: m_Name
       value: HealthBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 9174958923456421322, guid: b43f8b98ad7f8b64fa6da31ff2e8376f,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b43f8b98ad7f8b64fa6da31ff2e8376f, type: 3}
@@ -214,6 +224,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4038127747324640958}
     m_Modifications:
+    - target: {fileID: 3892031987941553438, guid: 6bcac3f11ea915744bc52f98a1857204,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3892031987941553439, guid: 6bcac3f11ea915744bc52f98a1857204,
         type: 3}
       propertyPath: m_Pivot.x
@@ -476,6 +491,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4038127747324640958}
     m_Modifications:
+    - target: {fileID: 922695279111638916, guid: 979ff7ff2cc49c1499af51aa78b72333,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6525097140240075978, guid: 979ff7ff2cc49c1499af51aa78b72333,
         type: 3}
       propertyPath: m_Pivot.x
@@ -613,6 +633,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4038127747324640958}
     m_Modifications:
+    - target: {fileID: 5329134672297421332, guid: 5416cb9fe57212c4da855babcdb8588a,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6275462109387473103, guid: 5416cb9fe57212c4da855babcdb8588a,
         type: 3}
       propertyPath: m_Pivot.x
@@ -826,12 +851,12 @@ PrefabInstance:
     - target: {fileID: 4813223168555014707, guid: 1226929e07586bd47b27af6703cb0875,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.3388672
+      value: -20.499268
       objectReference: {fileID: 0}
     - target: {fileID: 4813223168555014707, guid: 1226929e07586bd47b27af6703cb0875,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -9.200012
+      value: -9.700073
       objectReference: {fileID: 0}
     - target: {fileID: 4813223168555014707, guid: 1226929e07586bd47b27af6703cb0875,
         type: 3}
@@ -846,6 +871,16 @@ PrefabInstance:
     - target: {fileID: 4813223168555014707, guid: 1226929e07586bd47b27af6703cb0875,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5186613034775148399, guid: 1226929e07586bd47b27af6703cb0875,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7307762903821828141, guid: 1226929e07586bd47b27af6703cb0875,
+        type: 3}
+      propertyPath: m_RaycastTarget
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

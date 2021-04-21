@@ -97,6 +97,7 @@
     <Compile Include="Assets\UI\Scripts\CountText.cs" />
     <Compile Include="Assets\UI\Scripts\HealthBar.cs" />
     <Compile Include="Assets\UI\Scripts\InGameUIController.cs" />
+    <Compile Include="Assets\UI\Scripts\PauseManager.cs" />
     <Compile Include="Assets\UI\Scripts\WaveCountText.cs" />
     <Compile Include="Assets\UI\Scripts\WeaponChoose.cs" />
     <Compile Include="Assets\UI\Scripts\WeaponSlotUI.cs" />
@@ -106,7 +107,6 @@
     <Compile Include="Assets\Weapons\Rifle\Scripts\Rifle.cs" />
     <Compile Include="Assets\Weapons\Scripts\BulletWeapon.cs" />
     <Compile Include="Assets\Weapons\Scripts\RecoilingWeapon.cs" />
-    <Compile Include="Assets\Weapons\Scripts\ShootingPosition.cs" />
     <Compile Include="Assets\Weapons\Scripts\Weapon.cs" />
     <Compile Include="Assets\Weapons\Scripts\WeaponSack.cs" />
     <Compile Include="Assets\Weapons\Shotgun\Scripts\Shotgun.cs" />

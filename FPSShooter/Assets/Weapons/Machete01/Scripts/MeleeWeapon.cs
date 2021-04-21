@@ -80,22 +80,12 @@ public class MeleeWeapon : MonoBehaviour, Weapon
 
     virtual public void OnShow()
     {
-        SetAimImage(aim);
+        InGameUIController.Instance.aimUI.SetImage(aim);
     }
 
     virtual public void OnHide()
     {
 
-    }
-
-    //Todo: Do gamemanagera
-    private void SetAimImage(Sprite sprite)
-    {
-        var aimingUI = GameObject.FindGameObjectWithTag("Aim").GetComponent<Image>();
-        if (aimingUI != null)
-        {
-            aimingUI.sprite = sprite;
-        }
     }
 
     #region Animations
