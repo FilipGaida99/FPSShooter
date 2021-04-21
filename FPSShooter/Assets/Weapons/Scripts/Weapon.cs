@@ -17,6 +17,8 @@ public interface Weapon
     //Return true, when shoot was performed.
     bool Shoot(Vector3 from, Vector3 direction);
 
+    void FreeTrigger();
+
     bool Reload();
 
     bool ResupplyBullets();

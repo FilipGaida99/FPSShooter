@@ -104,12 +104,6 @@ public abstract class BulletWeapon : MonoBehaviour, Weapon, RecoilingWeapon
             leftToReload = ReloadTime;
         }
 
-        if (isSemiAuto)
-        {
-            UpdateSemiAutoMechanism();
-        }
-
-
         AdjustRecoil();
     }
 
@@ -152,6 +146,11 @@ public abstract class BulletWeapon : MonoBehaviour, Weapon, RecoilingWeapon
         recoilMagnitude = 1;
 
         return true;
+    }
+
+    public void FreeTrigger()
+    {
+        UpdateSemiAutoMechanism();
     }
 
     public bool ResupplyBullets()
@@ -266,9 +265,9 @@ public abstract class BulletWeapon : MonoBehaviour, Weapon, RecoilingWeapon
 
     private void UpdateSemiAutoMechanism()
     {
-        if (!wasReleased && !Input.GetButton("Fire1"))
+        if (isSemiAuto)
         {
             wasReleased = true;
-        }
+        } 
     }
 }

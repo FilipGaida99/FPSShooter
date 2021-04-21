@@ -7,15 +7,25 @@ using UnityEngine.Events;
 public class InputEvent
 {
     public string inputKey;
-    public bool Repeatable;
+    public TypeOfInput type;
     [SerializeField]
     public UnityEvent Function;
 
     public void Invoke()
     {
-        if ((Input.GetButton(inputKey) && Repeatable) || (Input.GetButtonDown(inputKey) && !Repeatable))
+        if (DownActive || RepatableHighActive || UpActive || RepatableLowActive)
         {
             Function.Invoke();
         }
     }
+
+    public bool DownActive => Input.GetButtonDown(inputKey) && type == TypeOfInput.Down;
+
+    public bool RepatableHighActive => Input.GetButton(inputKey) && type == TypeOfInput.RepeatableHigh;
+
+    public bool UpActive => Input.GetButtonUp(inputKey) && type == TypeOfInput.Up;
+
+    public bool RepatableLowActive => !Input.GetButton(inputKey) && type == TypeOfInput.RepeatableLow;
+
+    public enum TypeOfInput { Down, RepeatableHigh, Up, RepeatableLow};
 }

@@ -86,6 +86,14 @@ public class Player : MonoBehaviour, DestroyAble
         }
     }
 
+    virtual public void FreeTrigger()
+    {
+        if (weapons[chosedWeapon] != null && !isChanging)
+        {
+            weapons[chosedWeapon].FreeTrigger();
+        }
+    }
+
     virtual public void Reload()
     {
         if (weapons[chosedWeapon] != null && !isChanging)

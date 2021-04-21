@@ -73,12 +73,9 @@ public class MeleeWeapon : MonoBehaviour, Weapon
         return true;
     }
 
-    virtual public void Update()
+    virtual public void FreeTrigger()
     {
-        if (!wasReleased && !Input.GetButton("Fire1"))
-        {
-            wasReleased = true;
-        }
+        wasReleased = true;
     }
 
     virtual public void OnShow()
