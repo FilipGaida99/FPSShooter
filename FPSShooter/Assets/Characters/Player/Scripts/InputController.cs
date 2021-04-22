@@ -6,6 +6,7 @@ using UnityEngine.Events;
 
 public class InputController : MonoBehaviour
 {
+
     [Header("Moving Parameters")]
     public float walkingSpeed = 7.5f;
     public float runningSpeed = 11.5f;
@@ -34,6 +35,14 @@ public class InputController : MonoBehaviour
     private Player player;
     private CharacterAudioController characterAudio;
 
+    [Header("Input Mapping")]
+    public string verticalAxis = "Vertical";
+    public string horizontalAxis = "Horizontal";
+    public string mouseAxisX = "Mouse X";
+    public string mouseAxisY = "Mouse Y";
+    public string jumpButton = "Jump";
+    public string mouseScroll = "Mouse ScrollWheel";
+    public string runButton = "Run";
     public List<InputEvent> buttonActions;
 
     private void Awake()
@@ -42,18 +51,35 @@ public class InputController : MonoBehaviour
         player = GetComponent<Player>();
         characterAudio = GetComponent<CharacterAudioController>();
     }
-    private void Start()
-    {
-        // Lock cursor
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-    }
 
     private void Update()
     {
-        UpdateMovement();
-        UpdateWeapons();
-        characterAudio.UpdateSound();
+        if (!PauseManager.Instance.isPaused)
+        {
+            UpdateMovement();
+            UpdateWeapons();
+            characterAudio.UpdateSound();
+        }
+    }
+
+    public float GetRecoilFromMoveValue()
+    {
+        if (IsWalking)
+        {
+            if (isRunning)
+            {
+                return runningRecoil;
+            }
+            else
+            {
+                return walkingRecoil;
+            }
+        }
+        else if (!characterController.isGrounded)
+        {
+            return jumpingRecoil;
+        }
+        return 0;
     }
 
 
@@ -64,7 +90,7 @@ public class InputController : MonoBehaviour
             buttonAction.Invoke();
         }
 
-        if (Mathf.Abs(Input.mouseScrollDelta.y) > mouseRollTreshold)
+        if (Mathf.Abs(Input.GetAxis(mouseScroll)) > mouseRollTreshold)
         {
             player.ChangeWeaponToNext(Input.mouseScrollDelta.y > 0 ? 1 : -1);
         }
@@ -75,10 +101,10 @@ public class InputController : MonoBehaviour
     {
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
-        // Press Left Shift to run
-        isRunning = Input.GetButton("Run");
-        float curSpeedX = canMove ? (isRunning ? runningSpeed : walkingSpeed) * Input.GetAxis("Vertical") : 0;
-        float curSpeedY = canMove ? (isRunning ? runningSpeed : walkingSpeed) * Input.GetAxis("Horizontal") : 0;
+
+        isRunning = Input.GetButton(runButton);
+        float curSpeedX = canMove ? (isRunning ? runningSpeed : walkingSpeed) * Input.GetAxis(verticalAxis) : 0;
+        float curSpeedY = canMove ? (isRunning ? runningSpeed : walkingSpeed) * Input.GetAxis(horizontalAxis) : 0;
         float movementDirectionY = moveDirection.y;
         moveDirection = (forward * curSpeedX) + (right * curSpeedY);
 
@@ -116,42 +142,22 @@ public class InputController : MonoBehaviour
         }
         wasGrounded = characterController.isGrounded;
 
-        // Move the controller
+        // Move object
         characterController.Move(moveDirection * Time.deltaTime);
 
         // Player and childs rotation
         if (canMove)
         {
-            rotationX -= Input.GetAxis("Mouse Y") * lookSpeed;
+            rotationX -= Input.GetAxis(mouseAxisY) * lookSpeed;
             rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
-            rotationY += Input.GetAxis("Mouse X") * lookSpeed;
+            rotationY += Input.GetAxis(mouseAxisX) * lookSpeed;
             transform.rotation = Quaternion.identity;
             transform.Rotate(Vector3.right, rotationX, Space.World);
             transform.Rotate(Vector3.up, rotationY, Space.World);
         }
     }
 
-    private float GetRecoilFromMoveValue()
-    {
-        if (IsWalking)
-        {
-            if (isRunning)
-            {
-                return runningRecoil;
-            }
-            else
-            {
-                return walkingRecoil;
-            }
-        }
-        else if (!characterController.isGrounded)
-        {
-            return jumpingRecoil;
-        }
-        return 0;
-    }
-
     private bool IsWalking { get { return new Vector2(moveDirection.x, moveDirection.z) != Vector2.zero && characterController.isGrounded; } }
-    private bool IsJumping { get { return Input.GetButton("Jump") && canMove && characterController.isGrounded; } }
+    private bool IsJumping { get { return Input.GetButton(jumpButton) && canMove && characterController.isGrounded; } }
     private bool IsLanding { get { return !wasGrounded && characterController.isGrounded; } }
 }

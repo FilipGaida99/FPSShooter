@@ -16,8 +16,9 @@ public abstract class BulletWeapon : MonoBehaviour, Weapon, RecoilingWeapon
     [SerializeField]
     private float recoilReturnSpeed = 1;
     private float recoilMagnitude = 0;
-    private float lastRecoilMagnitude = 0;
+    [SerializeField]
     private Transform shootingPoint;
+    private Quaternion naturalRotation;
 
     [SerializeField]
     private float maxDistance = 100;
@@ -78,16 +79,17 @@ public abstract class BulletWeapon : MonoBehaviour, Weapon, RecoilingWeapon
     }
 
     virtual public void Awake()
-    {
+    { 
         if (linePrefab == null)
         {
             Debug.LogError("No line renderer in weapon");
         }
+
+        naturalRotation = transform.localRotation;
         magazine = maxMagazine;
         bullets = maxBullets;
         reloading = false;
         audioSource = GetComponent<AudioSource>();
-        shootingPoint = GetComponentInChildren<ShootingPosition>().transform;
         LayerMask mask = LayerMask.GetMask("Character");
         layerMaskValue = mask.value;
         layerMaskValue = ~layerMaskValue;
@@ -103,12 +105,6 @@ public abstract class BulletWeapon : MonoBehaviour, Weapon, RecoilingWeapon
         {
             leftToReload = ReloadTime;
         }
-
-        if (isSemiAuto)
-        {
-            UpdateSemiAutoMechanism();
-        }
-
 
         AdjustRecoil();
     }
@@ -154,9 +150,14 @@ public abstract class BulletWeapon : MonoBehaviour, Weapon, RecoilingWeapon
         return true;
     }
 
+    public void FreeTrigger()
+    {
+        UpdateSemiAutoMechanism();
+    }
+
     public bool ResupplyBullets()
     {
-        if(bullets == maxBullets)
+        if(bullets == maxBullets && magazine == maxMagazine)
         {
             return false;
         }
@@ -167,7 +168,6 @@ public abstract class BulletWeapon : MonoBehaviour, Weapon, RecoilingWeapon
 
     virtual public void OnShow()
     {
-        recoilMagnitude = 0;
         audioSource.Stop();
         InGameUIController.Instance.aimUI.SetImage(aim);
     }
@@ -225,9 +225,8 @@ public abstract class BulletWeapon : MonoBehaviour, Weapon, RecoilingWeapon
 
     private void AdjustRecoil()
     {
-        transform.Rotate(Vector3.back, recoilCurve.Evaluate(lastRecoilMagnitude), Space.Self);
+        transform.localRotation = naturalRotation;
         transform.Rotate(Vector3.forward, recoilCurve.Evaluate(recoilMagnitude), Space.Self);
-        lastRecoilMagnitude = recoilMagnitude;
         recoilMagnitude -= recoilReturnSpeed * Time.deltaTime;
         recoilMagnitude = Mathf.Clamp01(recoilMagnitude);
         InGameUIController.Instance.aimUI.SetImageScale(scaleAimImageToRecoil.Evaluate(recoilMagnitude));
@@ -266,9 +265,9 @@ public abstract class BulletWeapon : MonoBehaviour, Weapon, RecoilingWeapon
 
     private void UpdateSemiAutoMechanism()
     {
-        if (!wasReleased && !Input.GetButton("Fire1"))
+        if (isSemiAuto)
         {
             wasReleased = true;
-        }
+        } 
     }
 }

@@ -8,6 +8,11 @@ public class Player : MonoBehaviour, DestroyAble
     public bool IsAlive { get => Life > 0; }
 
     [SerializeField]
+    private float grabDistance = 1;
+    [SerializeField]
+    private int maxWeaponCount = 4;
+
+    [SerializeField]
     private float maxLife = 100;
 
     [Header("Starting Weapon Configuration")]
@@ -37,6 +42,13 @@ public class Player : MonoBehaviour, DestroyAble
     [SerializeField]
     private float hideShowTime = 0.1f;
 
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, grabDistance);
+    }
+
     // Start is called before the first frame update
     virtual public void Awake()
     {
@@ -56,8 +68,7 @@ public class Player : MonoBehaviour, DestroyAble
     {
         for(int i = 0; i< weaponsObjects.Count; i++)
         {
-            InGameUIController.Instance.weaponChoose.SetWeaponSlot(i, weapons[i].Icon, (i + 1).ToString());
-            weaponsObjects[i].SetActive(false);
+            PrepareWeapon(i);
         }
         chosedWeapon = primaryWeapon;
         weaponsObjects[chosedWeapon].SetActive(true);
@@ -75,6 +86,14 @@ public class Player : MonoBehaviour, DestroyAble
         }
     }
 
+    virtual public void FreeTrigger()
+    {
+        if (weapons[chosedWeapon] != null && !isChanging)
+        {
+            weapons[chosedWeapon].FreeTrigger();
+        }
+    }
+
     virtual public void Reload()
     {
         if (weapons[chosedWeapon] != null && !isChanging)
@@ -89,6 +108,51 @@ public class Player : MonoBehaviour, DestroyAble
         {
             StartCoroutine(QuickAttackRoutine());
         }
+    }
+
+    virtual public void TryGrab()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.forward, out hit, grabDistance))
+        {
+            var crate = hit.collider.gameObject.GetComponent<SupplyCrate>();
+            if(crate != null)
+            {
+                crate.Resupply(this);
+            }
+        }
+    }
+
+    virtual public bool AddWeapon(GameObject prefab)
+    {
+        bool wasResupplied = false;
+        if(ResuplyAmunition(prefab, out wasResupplied)){
+            return wasResupplied;
+        }
+
+        if ((weaponsPrefabs.Count + 1) > maxWeaponCount)
+        {
+            ReplaceWeapon(prefab);
+
+        }
+        else
+        {
+            GrabNewWeapon(prefab);
+        }
+        return true;
+    }
+
+    virtual public bool Heal(float healValue)
+    {
+        if(maxLife - Life < float.Epsilon)
+        {
+            return false;
+        }
+
+        Life += healValue;
+        Life = Mathf.Clamp(Life, 0, maxLife);
+        InGameUIController.Instance.healthBar.SetHealth(Life, maxLife);
+        return true;
     }
 
     virtual public void TakeDamage(float damage, Vector3 hitPoint)
@@ -139,6 +203,48 @@ public class Player : MonoBehaviour, DestroyAble
         }
     }
 
+    private bool ResuplyAmunition(GameObject prefab, out bool resupplyResult)
+    {
+        for (int i = 0; i < weaponsPrefabs.Count; i++)
+        {
+            if (prefab == weaponsPrefabs[i])
+            {
+                resupplyResult = weapons[i].ResupplyBullets();
+                RefreshBulletsUI();
+                return true;
+            }
+        }
+        resupplyResult = false;
+        return false;
+    }
+
+    private void GrabNewWeapon(GameObject prefab)
+    {
+        weaponsPrefabs.Add(prefab);
+        InstantiateWeapon(prefab);
+        PrepareWeapon(weapons.Count - 1);
+        ChangeWeapon(weapons.Count - 1);
+    }
+    private void ReplaceWeapon(GameObject prefab)
+    {
+        var indexToErase = chosedWeapon;
+        if (indexToErase == meleeWeaponIndex)
+        {
+            indexToErase++;
+            if (indexToErase >= weaponsPrefabs.Count)
+            {
+                indexToErase = 0;
+            }
+        }
+        weaponsPrefabs[indexToErase] = prefab;
+        Destroy(weaponsObjects[indexToErase]);
+        weaponsObjects[indexToErase] = Instantiate(prefab, transform);
+        weapons[indexToErase] = weaponsObjects[indexToErase].GetComponent<Weapon>();
+        
+        PrepareWeapon(indexToErase);
+        ChangeWeapon(indexToErase - 1);
+    }
+
     private bool InstantiateWeapon(GameObject prefab)
     {
         if (prefab == null)
@@ -155,6 +261,12 @@ public class Player : MonoBehaviour, DestroyAble
         weapons.Add(newWeapon.GetComponent<Weapon>());
 
         return true;
+    }
+
+    private void PrepareWeapon(int index)
+    {
+        InGameUIController.Instance.weaponChoose.SetWeaponSlot(index, weapons[index].Icon, (index + 1).ToString());
+        weaponsObjects[index].SetActive(false);
     }
 
     private void RefreshBulletsUI()

@@ -73,32 +73,19 @@ public class MeleeWeapon : MonoBehaviour, Weapon
         return true;
     }
 
-    virtual public void Update()
+    virtual public void FreeTrigger()
     {
-        if (!wasReleased && !Input.GetButton("Fire1"))
-        {
-            wasReleased = true;
-        }
+        wasReleased = true;
     }
 
     virtual public void OnShow()
     {
-        SetAimImage(aim);
+        InGameUIController.Instance.aimUI.SetImage(aim);
     }
 
     virtual public void OnHide()
     {
 
-    }
-
-    //Todo: Do gamemanagera
-    private void SetAimImage(Sprite sprite)
-    {
-        var aimingUI = GameObject.FindGameObjectWithTag("Aim").GetComponent<Image>();
-        if (aimingUI != null)
-        {
-            aimingUI.sprite = sprite;
-        }
     }
 
     #region Animations
