@@ -90,6 +90,7 @@
     <Compile Include="Assets\EnemySpawner\Scripts\EnemyCountCalculation.cs" />
     <Compile Include="Assets\EnemySpawner\Scripts\EnemySpawner.cs" />
     <Compile Include="Assets\Flare\Scripts\Flare.cs" />
+    <Compile Include="Assets\GameManager\Scripts\GameManager.cs" />
     <Compile Include="Assets\HighScoreLoader\HighScore.cs" />
     <Compile Include="Assets\HighScoreLoader\HighScoreLoader.cs" />
     <Compile Include="Assets\ParticleSystem\Scripts\HitMarkLifeController.cs" />

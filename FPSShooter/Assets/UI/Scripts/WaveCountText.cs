@@ -18,7 +18,7 @@ public class WaveCountText : CountText
         rectTransform = GetComponent<RectTransform>();
     }
 
-    public override void SetTextValue(uint value)
+    public override void SetTextValue(int value)
     {
         base.SetTextValue(value);
 

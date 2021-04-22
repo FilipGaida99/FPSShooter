@@ -211,7 +211,7 @@ MonoBehaviour:
   runButton: Run
   buttonActions:
   - inputKey: Fire1
-    type: 0
+    type: 1
     Function:
       m_PersistentCalls:
         m_Calls:

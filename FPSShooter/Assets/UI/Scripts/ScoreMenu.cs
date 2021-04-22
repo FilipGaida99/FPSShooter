@@ -22,9 +22,8 @@ public class ScoreMenu : MonoBehaviour
 
     public void Start()
     {
-        //Todo:pobrac z game managera.
-        wave = 20;
-        time = 3600;
+        wave = GameManager.Instance.Wave;
+        time = GameManager.Instance.ElapsedTime;
 
         SetScoreText();
 

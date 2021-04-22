@@ -19,7 +19,7 @@ public class EnemySpawner : MonoBehaviour
         player = FindObjectOfType<Player>();
     }
 
-    public void SpawnEnemies(int wave)
+    public int SpawnEnemies(int wave)
     {
         int enemiesToSpawn = enemyCountCalculation.Calculate(wave);
         int enemiesRemain = enemiesToSpawn;
@@ -33,6 +33,7 @@ public class EnemySpawner : MonoBehaviour
             enemiesRemain -= spawnPointEnemiesCount;
         }
         StartCoroutine(SpawnEnemiesOnPoint(spawnPoints[spawnPoints.Count - 1].spawnPoint, enemiesRemain));
+        return enemiesToSpawn;
     }
 
     private bool GetSpawnPointWeights(out List<SpawnPointWeight> spawnPoints)

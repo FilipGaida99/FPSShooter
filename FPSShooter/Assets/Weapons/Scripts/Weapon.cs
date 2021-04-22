@@ -4,9 +4,9 @@ using UnityEngine;
 
 public interface Weapon
 {
-    uint Magazine { get; set; }
+    int Magazine { get; set; }
 
-    uint BulletsLeft { get; set; }
+    int BulletsLeft { get; set; }
 
     float Damage { get; set; }
 

@@ -11,6 +11,7 @@ public class InGameUIController : MonoBehaviour
     public AimingImage aimUI;
     public CountText magazineText;
     public CountText bulletsText;
+    public CountText enemyCountText;
     public WaveCountText waveText;
     public HealthBar healthBar;
     public WeaponChoose weaponChoose;
@@ -32,13 +33,13 @@ public class InGameUIController : MonoBehaviour
         }
     }
 
-    public void SetMagazineAndBullets(uint magazine, uint bullets)
+    public void SetMagazineAndBullets(int magazine, int bullets)
     {
         magazineText.SetTextValue(magazine);
         bulletsText.SetTextValue(bullets);
     }
 
-    public void SetWave(uint wave)
+    public void SetWave(int wave)
     {
         waveText.animated = true;
         waveText.SetTextValue(wave);

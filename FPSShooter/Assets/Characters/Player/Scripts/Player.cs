@@ -64,7 +64,7 @@ public class Player : MonoBehaviour, DestroyAble
         weaponSack = GetComponentInChildren<WeaponSack>().transform;
     }
 
-    virtual public void Start()
+    virtual public IEnumerator Start()
     {
         for(int i = 0; i< weaponsObjects.Count; i++)
         {
@@ -75,6 +75,10 @@ public class Player : MonoBehaviour, DestroyAble
         InGameUIController.Instance.weaponChoose.ChooseWeapon(chosedWeapon, false);
         RefreshBulletsUI();
         InGameUIController.Instance.healthBar.SetHealth(Life, maxLife);
+
+        //Wait for everything set up and start game.
+        yield return null;
+        GameManager.Instance.StartGame();
     }
 
     virtual public void Shoot()
@@ -351,8 +355,7 @@ public class Player : MonoBehaviour, DestroyAble
             transform.rotation = Quaternion.Slerp(endRotation, startRotation, timeRemain / dyingTime);
             yield return null;
         }
-        Destroy(this);
-        //TODO: zmienić na wysłanie końca gry do gamemanagera
+        GameManager.Instance.EndGame();
 
     }
     #endregion

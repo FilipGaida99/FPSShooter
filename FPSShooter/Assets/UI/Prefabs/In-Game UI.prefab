@@ -57,7 +57,8 @@ MonoBehaviour:
   aimUI: {fileID: 1059936137386708777}
   magazineText: {fileID: 3285210182252327661}
   bulletsText: {fileID: 7697008072037271447}
-  waveText: {fileID: 0}
+  enemyCountText: {fileID: 1952590626746031699}
+  waveText: {fileID: 6134585165111968635}
   healthBar: {fileID: 9081618018253286374}
   weaponChoose: {fileID: 23931144337211845}
 --- !u!1001 &523232972880589065
@@ -484,6 +485,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 3406728216677189466}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6134585165111968635 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8819541172750468129, guid: b55a4cf4855dc224f83c17146823c13d,
+    type: 3}
+  m_PrefabInstance: {fileID: 3406728216677189466}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6567f6bd5066e0844bc381175a301bd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4448398726848481714
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -756,6 +769,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 5502563460536816164}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1952590626746031699 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6288703502187433079, guid: 5416cb9fe57212c4da855babcdb8588a,
+    type: 3}
+  m_PrefabInstance: {fileID: 5502563460536816164}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e05d53b3b4fea284ebc64aca3b1cd95a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8846845597850812123
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -851,7 +876,7 @@ PrefabInstance:
     - target: {fileID: 4813223168555014707, guid: 1226929e07586bd47b27af6703cb0875,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -20.499268
+      value: -20.499329
       objectReference: {fileID: 0}
     - target: {fileID: 4813223168555014707, guid: 1226929e07586bd47b27af6703cb0875,
         type: 3}

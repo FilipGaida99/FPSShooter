@@ -9,15 +9,15 @@ public class CountText : MonoBehaviour
     public int NumbersCount = 3;
 
     protected TextMeshProUGUI textUI;
-    protected uint lastValue = uint.MaxValue;
+    protected int lastValue = int.MaxValue;
 
-    private uint maxValue;
+    private int maxValue;
     private string formatingString;
     
     public virtual void Awake()
     {
         textUI = GetComponent<TextMeshProUGUI>();
-        maxValue = (uint)System.Math.Pow(10, NumbersCount);
+        maxValue = (int)System.Math.Pow(10, NumbersCount);
         formatingString = "";
         for(int i=0;i< NumbersCount; i++)
         {
@@ -30,7 +30,7 @@ public class CountText : MonoBehaviour
         SetTextValue(0);
     }
 
-    public virtual void SetTextValue(uint value)
+    public virtual void SetTextValue(int value)
     {
         if (value != lastValue)
         {

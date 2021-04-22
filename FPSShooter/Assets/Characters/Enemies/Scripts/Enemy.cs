@@ -92,6 +92,7 @@ public abstract class Enemy : MonoBehaviour, DestroyAble
             transform.Translate(yDelta * Vector3.down * (Time.deltaTime / timeOfDying), Space.World);
             yield return null;
         }
+        GameManager.Instance.EnemyKilled();
         Destroy(gameObject);
         yield break;
     }

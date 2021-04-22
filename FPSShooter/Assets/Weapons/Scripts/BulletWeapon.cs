@@ -23,11 +23,11 @@ public abstract class BulletWeapon : MonoBehaviour, Weapon, RecoilingWeapon
     [SerializeField]
     private float maxDistance = 100;
     [SerializeField]
-    private uint maxMagazine = 10;
+    private int maxMagazine = 10;
     [SerializeField]
-    private uint maxBullets = 300;
-    private uint magazine;
-    private uint bullets;
+    private int maxBullets = 300;
+    private int magazine;
+    private int bullets;
     private bool reloading;
     private float leftToReload;
     [SerializeField]
@@ -53,9 +53,9 @@ public abstract class BulletWeapon : MonoBehaviour, Weapon, RecoilingWeapon
 
     public abstract float ReloadTime { get; }
 
-    virtual public uint Magazine { get => magazine; set => magazine = value; }
+    virtual public int Magazine { get => magazine; set => magazine = value; }
 
-    virtual public uint BulletsLeft { get => bullets; set => bullets = value; }
+    virtual public int BulletsLeft { get => bullets; set => bullets = value; }
 
     virtual public float Damage { get => damage; set => damage = value; }
 
@@ -190,7 +190,6 @@ public abstract class BulletWeapon : MonoBehaviour, Weapon, RecoilingWeapon
         if (Physics.Raycast(from, direction, out hit, maxDistance, layerMaskValue))
         {
             hitPoint = hit.point;
-            //TODO cast Enemy.
             var target = hit.collider.gameObject.GetComponent<DestroyAble>();
             if (target != null)
             {

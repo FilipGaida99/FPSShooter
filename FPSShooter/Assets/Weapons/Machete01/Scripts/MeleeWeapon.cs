@@ -21,9 +21,9 @@ public class MeleeWeapon : MonoBehaviour, Weapon
     private bool wasReleased = true;
     private bool combination = false;
 
-    virtual public uint Magazine { get => 0; set {} }
+    virtual public int Magazine { get => 0; set {} }
 
-    virtual public uint BulletsLeft { get => 0; set { } }
+    virtual public int BulletsLeft { get => 0; set { } }
 
     virtual public float Damage { get => damage; set => damage = value; }
 
