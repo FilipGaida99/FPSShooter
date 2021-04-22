@@ -4,3 +4,5 @@ Healthbar sprite: https://opengameart.org/content/sleek-bars
 Czaszka: https://thenounproject.com/term/jolly-roger/1932874/ "jolly roger by Vectors Market from the Noun Project"
 ikona M4A1: https://upload.wikimedia.org/wikipedia/commons/f/fa/Colt_M4A1_silhouette.svg
 ikona shotguna: https://pixabay.com/vectors/gun-shot-weapon-violence-war-5063185/
+kostka: https://pixabay.com/vectors/dice-one-two-three-307540/
+obrazek pustni: https://pixabay.com/vectors/landscape-desert-sand-dunes-5572558/

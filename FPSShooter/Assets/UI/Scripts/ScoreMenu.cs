@@ -7,8 +7,6 @@ using UnityEngine.SceneManagement;
 
 public class ScoreMenu : MonoBehaviour
 {
-    public int mainMenuBuildIndex;
-
     public TextMeshProUGUI miscText;
     public TextMeshProUGUI waveText;
     public TextMeshProUGUI timeText;
@@ -43,7 +41,7 @@ public class ScoreMenu : MonoBehaviour
 
     public void GoToMainMenu()
     {
-        SceneManager.LoadScene(mainMenuBuildIndex);
+        MenuScenesManager.Instance.Load(MenuScenesManager.Scene.Menu);
     }
 
     private void SetScoreText()

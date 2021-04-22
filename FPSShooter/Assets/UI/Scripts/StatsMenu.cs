@@ -7,8 +7,6 @@ using UnityEngine.SceneManagement;
 
 public class StatsMenu : MonoBehaviour
 {
-    public int mainMenuBuildIndex;
-
     public TextMeshProUGUI waveText;
     public TextMeshProUGUI timeText;
 
@@ -24,7 +22,7 @@ public class StatsMenu : MonoBehaviour
 
     public void GoToMainMenu()
     {
-        SceneManager.LoadScene(mainMenuBuildIndex);
+        MenuScenesManager.Instance.Load(MenuScenesManager.Scene.Menu);
     }
 
     public void ResetScore()

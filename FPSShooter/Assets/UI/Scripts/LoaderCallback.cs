@@ -12,6 +12,6 @@ public class LoaderCallback : MonoBehaviour
             return;
 
         isFirstUpdate = false;
-        ScenesManager.Instance.SManagerCallback();
+        MenuScenesManager.Instance.SManagerCallback();
     }
 }

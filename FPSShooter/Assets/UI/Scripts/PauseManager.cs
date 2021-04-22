@@ -47,7 +47,7 @@ public class PauseManager : MonoBehaviour
     public void Surrender()
     {
         //Todo: gmaemanager endgame.
-        SceneManager.LoadScene(2);
+        MenuScenesManager.Instance.Load(MenuScenesManager.Scene.ScoreMenu);
     }
 
     private void SetToState()
