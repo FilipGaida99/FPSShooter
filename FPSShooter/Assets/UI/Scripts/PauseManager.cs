@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseManager : MonoBehaviour
 {
@@ -41,6 +42,12 @@ public class PauseManager : MonoBehaviour
     {
         isPaused = pause;
         SetToState();
+    }
+
+    public void Surrender()
+    {
+        //Todo: gmaemanager endgame.
+        SceneManager.LoadScene(2);
     }
 
     private void SetToState()
