@@ -101,6 +101,7 @@
     <Compile Include="Assets\UI\Scripts\InGameUIController.cs" />
     <Compile Include="Assets\UI\Scripts\PauseManager.cs" />
     <Compile Include="Assets\UI\Scripts\ScoreMenu.cs" />
+    <Compile Include="Assets\UI\Scripts\StatsMenu.cs" />
     <Compile Include="Assets\UI\Scripts\WaveCountText.cs" />
     <Compile Include="Assets\UI\Scripts\WeaponChoose.cs" />
     <Compile Include="Assets\UI\Scripts\WeaponSlotUI.cs" />

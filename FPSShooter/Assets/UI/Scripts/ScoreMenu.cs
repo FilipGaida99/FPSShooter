@@ -22,11 +22,6 @@ public class ScoreMenu : MonoBehaviour
     private int wave;
     private float time;
 
-    public void GoToMainMenu()
-    {
-        SceneManager.LoadScene(mainMenuBuildIndex);
-    }
-
     public void Start()
     {
         //Todo:pobrac z game managera.
@@ -44,6 +39,11 @@ public class ScoreMenu : MonoBehaviour
         {
             miscText.text = GetRandomCongratulations();
         }
+    }
+
+    public void GoToMainMenu()
+    {
+        SceneManager.LoadScene(mainMenuBuildIndex);
     }
 
     private void SetScoreText()
