@@ -6,3 +6,4 @@ ikona M4A1: https://upload.wikimedia.org/wikipedia/commons/f/fa/Colt_M4A1_silhou
 ikona shotguna: https://pixabay.com/vectors/gun-shot-weapon-violence-war-5063185/
 kostka: https://pixabay.com/vectors/dice-one-two-three-307540/
 obrazek pustni: https://pixabay.com/vectors/landscape-desert-sand-dunes-5572558/
+obrazek nutek: https://pixabay.com/vectors/music-note-music-note-musical-notes-1967480/

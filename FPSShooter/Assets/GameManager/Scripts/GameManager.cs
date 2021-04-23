@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     public State state;
     public float crateDropInterval;
     public MenuScenesManager.Scene endGameScene = MenuScenesManager.Scene.ScoreMenu;
+    [HideInInspector]
     public Camera mainCamera;
 
     private float startTime;
@@ -35,6 +36,8 @@ public class GameManager : MonoBehaviour
     private CrateSpawner crateSpawner;
     private Coroutine crateSpawnCorotine;
     private int waveEnemiesCount = 0;
+
+    private MusicBackground music;
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
@@ -51,6 +54,8 @@ public class GameManager : MonoBehaviour
         {
             _instance = this;
             DontDestroyOnLoad(gameObject);
+            music = GetComponent<MusicBackground>();
+            music.Play();
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
     }

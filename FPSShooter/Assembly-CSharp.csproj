@@ -93,6 +93,7 @@
     <Compile Include="Assets\EnemySpawner\Scripts\EnemySpawner.cs" />
     <Compile Include="Assets\Flare\Scripts\Flare.cs" />
     <Compile Include="Assets\GameManager\Scripts\GameManager.cs" />
+    <Compile Include="Assets\GameManager\Scripts\MusicBackground.cs" />
     <Compile Include="Assets\HighScoreLoader\HighScore.cs" />
     <Compile Include="Assets\HighScoreLoader\HighScoreLoader.cs" />
     <Compile Include="Assets\ParticleSystem\Scripts\HitMarkLifeController.cs" />
@@ -106,6 +107,7 @@
     <Compile Include="Assets\UI\Scripts\Menu.cs" />
     <Compile Include="Assets\UI\Scripts\PauseManager.cs" />
     <Compile Include="Assets\UI\Scripts\ScoreMenu.cs" />
+    <Compile Include="Assets\UI\Scripts\SoundControll.cs" />
     <Compile Include="Assets\UI\Scripts\StatsMenu.cs" />
     <Compile Include="Assets\UI\Scripts\WaveCountText.cs" />
     <Compile Include="Assets\UI\Scripts\WeaponChoose.cs" />
