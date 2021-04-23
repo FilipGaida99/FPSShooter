@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6516181514590853348}
   - component: {fileID: 6516181514590853349}
   - component: {fileID: 758575775}
+  - component: {fileID: 13996474}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -125,6 +126,21 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &13996474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6516181514590853371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2a554eb274fdbf4fa6c6c989090d2cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zoomedFov: 20
+  normalFov: 0
+  zoomSpeed: 10
 --- !u!1 &6516181514845368387
 GameObject:
   m_ObjectHideFlags: 0
@@ -377,6 +393,38 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 2021153022}
           m_MethodName: FreeTrigger
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - inputKey: Fire2
+    type: 1
+    Function:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 13996474}
+          m_MethodName: Zoom
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - inputKey: Fire2
+    type: 3
+    Function:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 13996474}
+          m_MethodName: Return
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

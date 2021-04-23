@@ -20,6 +20,7 @@ public class MeleeWeapon : MonoBehaviour, Weapon
     private bool animating = false;
     private bool wasReleased = true;
     private bool combination = false;
+    private Collider collider;
 
     virtual public int Magazine { get => 0; set {} }
 
@@ -36,6 +37,12 @@ public class MeleeWeapon : MonoBehaviour, Weapon
         animating = false;
         wasReleased = true;
         combination = false;
+    }
+
+    public void Awake()
+    {
+        collider = GetComponent<Collider>();
+        collider.enabled = false;
     }
 
     public void OnCollisionEnter(Collision collision)
@@ -81,6 +88,7 @@ public class MeleeWeapon : MonoBehaviour, Weapon
     virtual public void OnShow()
     {
         InGameUIController.Instance.aimUI.SetImage(aim);
+        collider.enabled = false;
     }
 
     virtual public void OnHide()
@@ -92,6 +100,7 @@ public class MeleeWeapon : MonoBehaviour, Weapon
     virtual protected IEnumerator AnimateSwing()
     {
         //TODO:Turn on/off colisions.
+        collider.enabled = true;
         var startPosition = transform.localPosition;
         var startRotation = transform.localRotation;
         //Start
@@ -181,7 +190,7 @@ public class MeleeWeapon : MonoBehaviour, Weapon
         animating = false;
         transform.localRotation = startRotation;
         transform.localPosition = startPosition;
-        yield break;
+        collider.enabled = false;
     }
 
     #endregion

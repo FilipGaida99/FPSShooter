@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class GameManager : MonoBehaviour
     public State state;
     public float crateDropInterval;
     public MenuScenesManager.Scene endGameScene = MenuScenesManager.Scene.ScoreMenu;
+    public Camera mainCamera;
 
     private float startTime;
     private float endTime;
@@ -33,7 +35,11 @@ public class GameManager : MonoBehaviour
     private CrateSpawner crateSpawner;
     private Coroutine crateSpawnCorotine;
     private int waveEnemiesCount = 0;
-    private float crateSpawnElapsedTime = 0f;
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        mainCamera = Camera.main;
+    }
 
     public void Awake()
     {
@@ -45,6 +51,7 @@ public class GameManager : MonoBehaviour
         {
             _instance = this;
             DontDestroyOnLoad(gameObject);
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
     }
 
@@ -80,6 +87,9 @@ public class GameManager : MonoBehaviour
             {
                 StopCoroutine(crateSpawnCorotine);
             }
+
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
             MenuScenesManager.Instance.Load(endGameScene);
         }
     }

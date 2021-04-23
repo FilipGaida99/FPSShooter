@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7353909879121161976}
-  - component: {fileID: 373518527613034845}
   - component: {fileID: 373518527613034846}
+  - component: {fileID: 2048765819}
   m_Layer: 0
   m_Name: EnemySpawner
   m_TagString: Untagged
@@ -36,18 +36,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &373518527613034845
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2443293508214085335}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af79408ac4c0e734d97276bb36bea669, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &373518527613034846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,7 +52,21 @@ MonoBehaviour:
   - {fileID: 4493914613880827488, guid: 6dc4cf4496348884d8ee27743ae38562, type: 3}
   - {fileID: 617621492481886017, guid: 15e278df78174d74892ff3ffcb1e07c2, type: 3}
   spawnInterval: 0.3
-  enemyCountCalculation: {fileID: 373518527613034845}
+  enemyCountCalculation: {fileID: 2048765819}
+--- !u!114 &2048765819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2443293508214085335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e4e6149c388c2342bc7e2ac84f98b14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  power: 2
+  offset: 20
 --- !u!1001 &3792846097218532780
 PrefabInstance:
   m_ObjectHideFlags: 0

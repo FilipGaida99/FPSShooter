@@ -76,6 +76,7 @@
     <Compile Include="Assets\Characters\Player\Scripts\InputController.cs" />
     <Compile Include="Assets\Characters\Player\Scripts\InputEvent.cs" />
     <Compile Include="Assets\Characters\Player\Scripts\Player.cs" />
+    <Compile Include="Assets\Characters\Player\Scripts\Sight.cs" />
     <Compile Include="Assets\Characters\Scripts\CharacterAudioController.cs" />
     <Compile Include="Assets\Characters\Scripts\CharacterState.cs" />
     <Compile Include="Assets\Characters\Scripts\DestroyAble.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="Assets\Crates\Scripts\SupplyCrate.cs" />
     <Compile Include="Assets\EnemySpawner\Scripts\BilboardPortal.cs" />
     <Compile Include="Assets\EnemySpawner\Scripts\EnemyCountCalculation.cs" />
+    <Compile Include="Assets\EnemySpawner\Scripts\EnemyCountPower.cs" />
     <Compile Include="Assets\EnemySpawner\Scripts\EnemySpawner.cs" />
     <Compile Include="Assets\Flare\Scripts\Flare.cs" />
     <Compile Include="Assets\GameManager\Scripts\GameManager.cs" />

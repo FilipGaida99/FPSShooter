@@ -27,6 +27,7 @@ public abstract class Enemy : MonoBehaviour, DestroyAble
     private float waitTime = 1;
     [SerializeField]
     private float timeOfDying = 1;
+    private bool isDying = false;
 
 
     abstract public void Attack();
@@ -84,16 +85,19 @@ public abstract class Enemy : MonoBehaviour, DestroyAble
 
     private IEnumerator Dying()
     {
-        GetComponent<CharacterController>().enabled = false;
-        var timeRemain = timeOfDying;
-        yield return new WaitForSeconds(waitTime);
-        while((timeRemain -= Time.deltaTime) > 0)
+        if (!isDying)
         {
-            transform.Translate(yDelta * Vector3.down * (Time.deltaTime / timeOfDying), Space.World);
-            yield return null;
+            isDying = true;
+            GetComponent<CharacterController>().enabled = false;
+            var timeRemain = timeOfDying;
+            yield return new WaitForSeconds(waitTime);
+            while ((timeRemain -= Time.deltaTime) > 0)
+            {
+                transform.Translate(yDelta * Vector3.down * (Time.deltaTime / timeOfDying), Space.World);
+                yield return null;
+            }
+            GameManager.Instance.EnemyKilled();
+            Destroy(gameObject);
         }
-        GameManager.Instance.EnemyKilled();
-        Destroy(gameObject);
-        yield break;
     }
 }
