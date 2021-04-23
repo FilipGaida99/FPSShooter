@@ -129,7 +129,7 @@ public abstract class BulletWeapon : MonoBehaviour, Weapon, RecoilingWeapon
     virtual public bool Shoot(Vector3 from, Vector3 direction)
     {
         //Checking if can shoot.
-        if (!WeaponReadyForReload || !CanShootOnSemiAuto || !WeaponReadyForShoot)
+        if ((!WeaponReadyForReload && magazine <= 0) || !CanShootOnSemiAuto || !WeaponReadyForShoot)
         {
             return false; 
         }

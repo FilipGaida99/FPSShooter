@@ -193,6 +193,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HealthBar
       objectReference: {fileID: 0}
+    - target: {fileID: 8739946346055178991, guid: b43f8b98ad7f8b64fa6da31ff2e8376f,
+        type: 3}
+      propertyPath: changeSpeed
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 9174958923456421322, guid: b43f8b98ad7f8b64fa6da31ff2e8376f,
         type: 3}
       propertyPath: m_RaycastTarget
@@ -876,7 +881,7 @@ PrefabInstance:
     - target: {fileID: 4813223168555014707, guid: 1226929e07586bd47b27af6703cb0875,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -20.499329
+      value: -20.49939
       objectReference: {fileID: 0}
     - target: {fileID: 4813223168555014707, guid: 1226929e07586bd47b27af6703cb0875,
         type: 3}
