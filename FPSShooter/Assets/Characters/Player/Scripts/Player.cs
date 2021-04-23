@@ -72,12 +72,12 @@ public class Player : MonoBehaviour, DestroyAble
         }
         chosedWeapon = primaryWeapon;
         weaponsObjects[chosedWeapon].SetActive(true);
-        InGameUIController.Instance.weaponChoose.ChooseWeapon(chosedWeapon, false);
-        RefreshBulletsUI();
-        InGameUIController.Instance.healthBar.SetHealth(Life, maxLife);
 
         //Wait for everything set up and start game.
         yield return null;
+        InGameUIController.Instance.weaponChoose.ChooseWeapon(chosedWeapon, false);
+        RefreshBulletsUI();
+        InGameUIController.Instance.healthBar.SetHealth(Life, maxLife);
         GameManager.Instance.StartGame();
     }
 
